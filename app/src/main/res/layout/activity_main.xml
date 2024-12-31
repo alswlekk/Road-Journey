@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- 네비게이션 호스트 프래그먼트 -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcv_home"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -20,16 +19,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-    <!-- 바텀 네비게이션 -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_home"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:itemRippleColor="@null"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
         android:background="@color/white"
         app:labelVisibilityMode="unlabeled"
-        app:itemIconTint="#629DFE"
-        app:itemTextColor="#629DFE"
+        app:itemIconTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
