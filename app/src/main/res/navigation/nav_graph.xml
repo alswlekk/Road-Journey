@@ -21,6 +21,6 @@
 
     <fragment
         android:id="@+id/fragment_my_page"
-        android:name="com.roadjourney.MyPageFragment"
+        android:name="com.roadjourney.MyPage.MyPageFragment"
         android:label="마이페이지" />
 </navigation>
