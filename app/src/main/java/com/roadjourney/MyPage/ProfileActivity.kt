@@ -12,6 +12,12 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupClickListeners()
     }
 
+    private fun setupClickListeners() {
+        binding.ivProfileBack.setOnClickListener {
+        }
+    }
 }
