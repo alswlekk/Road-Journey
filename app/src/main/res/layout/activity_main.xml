@@ -28,7 +28,7 @@
         app:itemActiveIndicatorStyle="@android:color/transparent"
         android:background="@color/white"
         app:labelVisibilityMode="unlabeled"
-        app:itemIconTint="@color/blue"
+        app:itemIconTint="@color/blue1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

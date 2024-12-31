@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_home"
-        android:name="com.roadjourney.HomeFragment"
+        android:name="com.roadjourney.Home.HomeFragment"
         android:label="홈" />
 
     <fragment
