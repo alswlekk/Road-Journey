@@ -26,5 +26,9 @@ class MyPageFragment : Fragment() {
             val intent = Intent(requireContext(), ProfileActivity::class.java)
             startActivity(intent)
         }
+        binding.clMyPageItem.setOnClickListener {
+            val intent = Intent(requireContext(), ItemActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

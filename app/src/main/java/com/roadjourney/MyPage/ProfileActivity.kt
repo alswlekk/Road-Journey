@@ -18,6 +18,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         binding.ivProfileBack.setOnClickListener {
+            finish()
         }
     }
 }
