@@ -30,5 +30,9 @@ class MyPageFragment : Fragment() {
             val intent = Intent(requireContext(), ItemActivity::class.java)
             startActivity(intent)
         }
+        binding.clMyPageSetting.setOnClickListener {
+            val intent = Intent(requireContext(), SettingActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
