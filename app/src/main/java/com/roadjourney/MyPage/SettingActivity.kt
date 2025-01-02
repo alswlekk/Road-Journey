@@ -2,22 +2,22 @@ package com.roadjourney.MyPage
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.roadjourney.databinding.ActivityProfileBinding
+import com.roadjourney.databinding.ActivitySettingBinding
 
-class ProfileActivity : AppCompatActivity() {
+class SettingActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityProfileBinding
+    private lateinit var binding: ActivitySettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
+        binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupClickListeners()
     }
 
     private fun setupClickListeners() {
-        binding.ivProfileBack.setOnClickListener {
+        binding.ivSettingBack.setOnClickListener {
             finish()
         }
     }
