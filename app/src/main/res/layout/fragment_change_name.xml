@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_change_name_back" />
 
     <EditText
-        android:id="@+id/et_id_change"
+        android:id="@+id/et_name_change"
         android:layout_width="310dp"
         android:layout_height="60dp"
         android:layout_marginTop="70dp"
@@ -103,6 +103,6 @@
         android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_id_change" />
+        app:layout_constraintTop_toBottomOf="@+id/et_name_change" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
