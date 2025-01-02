@@ -1,11 +1,13 @@
 package com.roadjourney.Home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.roadjourney.AddGoalActivity
 import com.roadjourney.R
 import com.roadjourney.databinding.FragmentHomeBinding
 
@@ -26,8 +28,15 @@ class HomeFragment : Fragment() {
         updateRecyclerViewData(getRepeatData())
 
         setupSegmentedControl()
-
+        setupClickListeners()
         return binding.root
+    }
+
+    private fun setupClickListeners() {
+        binding.ivHomeAdd.setOnClickListener {
+            val intent = Intent(requireContext(), AddGoalActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupSegmentedControl() {
