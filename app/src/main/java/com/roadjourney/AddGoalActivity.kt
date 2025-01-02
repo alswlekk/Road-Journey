@@ -12,6 +12,13 @@ class AddGoalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddGoalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupClickListeners()
     }
 
+    private fun setupClickListeners() {
+        binding.ivAddGoalBack.setOnClickListener {
+            finish()
+        }
+    }
 }
