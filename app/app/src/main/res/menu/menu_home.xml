@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_home"
+        android:icon="@drawable/ic_nav_home_selector"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/fragment_friend"
+        android:icon="@drawable/ic_nav_friend_selector"
+        android:title="친구" />
+
+    <item
+        android:id="@+id/fragment_shop"
+        android:icon="@drawable/ic_nav_shop_selector"
+        android:title="쇼핑" />
+
+    <item
+        android:id="@+id/fragment_my_page"
+        android:icon="@drawable/ic_nav_my_page_selector"
+        android:title="마이페이지" />
+</menu>
+

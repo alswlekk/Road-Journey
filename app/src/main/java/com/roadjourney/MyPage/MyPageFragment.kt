@@ -17,8 +17,23 @@ class MyPageFragment : Fragment() {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
         setupClickListeners()
-
+        achievementClickListeners()
+        accountClickListeners()
         return binding.root
+    }
+
+    private fun accountClickListeners() {
+        binding.clMyPageAccount.setOnClickListener {
+            val intent = Intent(requireContext(), AccountManagementActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun achievementClickListeners() {
+        binding.clMyPageChallenge.setOnClickListener {
+            val intent = Intent(requireContext(), AchievementActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupClickListeners() {

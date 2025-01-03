@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateAccount.CreateAccount1Fragment">
+
+    <ImageView
+        android:id="@+id/iv_top_count1"
+        android:layout_width="104dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="54dp"
+        android:src="@drawable/create_account_filled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_top_count2"
+        android:layout_width="104dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/create_account_unfilled"
+        app:layout_constraintStart_toEndOf="@+id/iv_top_count1"
+        app:layout_constraintTop_toTopOf="@+id/iv_top_count1" />
+
+    <ImageView
+        android:id="@+id/iv_top_count3"
+        android:layout_width="104dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/create_account_unfilled"
+        app:layout_constraintStart_toEndOf="@+id/iv_top_count2"
+        app:layout_constraintTop_toTopOf="@+id/iv_top_count1" />
+
+    <TextView
+        android:id="@+id/tv_request_account_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="62dp"
+        android:text="사용하실 계정 정보를 입력해주세요."
+        android:textColor="@color/blue2"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_top_count1" />
+
+    <LinearLayout
+        android:id="@+id/ll_create_account_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@+id/tv_request_account_text"
+        app:layout_constraintTop_toBottomOf="@id/tv_request_account_text">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디"
+            android:textColor="@color/blue6"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_create_account_id"
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/shape_login"
+            android:paddingStart="21dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="14dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="이미 존재하는 아이디입니다."
+            android:textColor="@color/red1"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_create_account_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@+id/tv_request_account_text"
+        app:layout_constraintTop_toBottomOf="@id/ll_create_account_id">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호"
+            android:textColor="@color/blue6"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_create_account_pw"
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/shape_login"
+            android:paddingStart="21dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="영문, 숫자, 특수문자 포함 10자 이상 입력해주세요."
+            android:textColor="@color/red1"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_create_account_pw_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@+id/tv_request_account_text"
+        app:layout_constraintTop_toBottomOf="@id/ll_create_account_pw">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호 확인"
+            android:textColor="@color/blue6"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_create_account_pw_check"
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/shape_login"
+            android:paddingStart="21dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="14dp"
+            android:fontFamily="@font/samliphopangche"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:fontFamily="@font/samliphopangche"
+            android:text="입력하신 비밀번호가 일치하지 않습니다."
+            android:textColor="@color/red1"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_create_account_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@+id/tv_request_account_text"
+        app:layout_constraintTop_toBottomOf="@id/ll_create_account_pw_check">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이메일"
+            android:textColor="@color/blue6"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_create_account_email"
+            android:layout_width="310dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="9dp"
+            android:background="@drawable/shape_login"
+            android:paddingStart="21dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="14dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="이미 존재하는 이메일입니다."
+            android:textColor="@color/red1"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_next_unfilled"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/btn_next_unfilled"
+        android:text="다음으로"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_next_filled"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/btn_next_filled"
+        android:text="다음으로"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
