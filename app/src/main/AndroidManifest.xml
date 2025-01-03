@@ -49,6 +49,10 @@
             android:name=".AddGoalActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".ArchiveActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>
