@@ -31,4 +31,135 @@
         app:layout_constraintStart_toEndOf="@id/iv_archive_back"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tv_archive_archieve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="성공 여부 :"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="29dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
+
+    <Spinner
+        android:id="@+id/sp_archive_archieve"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="7dp"
+        style="@style/Widget.My.Spinner"
+        android:spinnerMode="dropdown"
+        android:padding="0dp"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/white"
+        android:popupBackground="@color/white"
+        android:dropDownWidth="90dp"
+        app:layout_constraintStart_toEndOf="@id/tv_archive_archieve"
+        app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
+
+    <TextView
+        android:id="@+id/tv_archive_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유형 :"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="29dp"
+        android:layout_marginStart="29dp"
+        app:layout_constraintStart_toEndOf="@id/sp_archive_archieve"
+        app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
+
+    <Spinner
+        android:id="@+id/sp_archive_type"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="21dp"
+        style="@style/Widget.My.Spinner"
+        android:spinnerMode="dropdown"
+        android:padding="0dp"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/white"
+        android:popupBackground="@color/white"
+        android:dropDownWidth="90dp"
+        app:layout_constraintStart_toEndOf="@id/tv_archive_type"
+        app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
+
+    <TextView
+        android:id="@+id/tv_archive_goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="하위 목표 :"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="74dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
+
+    <Spinner
+        android:id="@+id/sp_archive_goal"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginStart="7dp"
+        style="@style/Widget.My.Spinner"
+        android:spinnerMode="dropdown"
+        android:padding="0dp"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/white"
+        android:popupBackground="@color/white"
+        android:dropDownWidth="90dp"
+        app:layout_constraintStart_toEndOf="@id/tv_archive_archieve"
+        app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
+
+    <TextView
+        android:id="@+id/tv_archive_array"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정렬 :"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="74dp"
+        android:layout_marginStart="29dp"
+        app:layout_constraintStart_toEndOf="@id/sp_archive_archieve"
+        app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
+
+    <Spinner
+        android:id="@+id/sp_archive_array"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginStart="21dp"
+        style="@style/Widget.My.Spinner"
+        android:spinnerMode="dropdown"
+        android:padding="0dp"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/white"
+        android:popupBackground="@color/white"
+        android:dropDownWidth="90dp"
+        app:layout_constraintStart_toEndOf="@id/tv_archive_type"
+        app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray3"
+        android:layout_marginTop="13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sp_archive_array" />
 </androidx.constraintlayout.widget.ConstraintLayout>
