@@ -34,5 +34,13 @@ class MyPageFragment : Fragment() {
             val intent = Intent(requireContext(), SettingActivity::class.java)
             startActivity(intent)
         }
+        binding.clMyPageAccount.setOnClickListener {
+            val intent = Intent(requireContext(), AccountManagementActivity::class.java)
+            startActivity(intent)
+        }
+        binding.clMyPageChallenge.setOnClickListener {
+            val intent = Intent(requireContext(), AchievementActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/shape_achievement"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_achievement_trophy"
+        android:id="@+id/iv_achievement_trophy"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="9dp"
+        />
+
+    <TextView
+        android:textColor="@color/blue2"
+        android:textSize="16.8sp"
+        android:fontFamily="@font/samliphopangche"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="천리 길도 한 걸음부터"
+        android:id="@+id/tv_achievement_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="82.7dp"
+        android:layout_marginTop="14.26dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="목표를 10개 성취하세요"
+        android:id="@+id/tv_achievement_mission"
+        android:textColor="#777777"
+        android:textSize="15.12sp"
+        android:fontFamily="@font/samliphopangche"
+        android:layout_marginTop="19.78dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_achievement_title"
+        app:layout_constraintStart_toStartOf="@id/tv_achievement_title"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="성장 포인트 + 5 골드 + 100"
+        android:textColor="#468CFF"
+        android:id="@+id/tv_achievement_reward"
+        android:textSize="13.44sp"
+        app:layout_constraintTop_toTopOf="@+id/tv_achievement_mission"
+        app:layout_constraintStart_toStartOf="@id/tv_achievement_mission"
+        android:layout_marginTop="25.42dp"
+        android:layout_marginStart="0.38dp"
+        android:fontFamily="@font/samliphopangche"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_acheivement_success"
+        android:id="@+id/iv_achievement"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="14dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

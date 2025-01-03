@@ -224,7 +224,7 @@
                     android:layout_marginHorizontal="11dp" />
 
         </LinearLayout>
-            
+
     <TextView
                 android:id="@+id/tv_add_goal_detail"
                 android:layout_width="wrap_content"
