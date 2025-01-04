@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.LoginActivity">
+    tools:context=".Login.LoginActivity"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/iv_login_logo"
@@ -18,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,6 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_login_logo">
 
         <TextView
+            android:fontFamily="@font/samliphopangche"
             android:id="@+id/tv_login_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,6 +54,8 @@
             android:textStyle="bold" />
 
         <EditText
+            android:textColor="#003A9A"
+            android:fontFamily="@font/samliphopangche"
             android:id="@+id/et_login_id"
             android:layout_width="310dp"
             android:layout_height="50dp"
@@ -71,6 +76,7 @@
         app:layout_constraintTop_toBottomOf="@id/ll_login_id">
 
         <TextView
+            android:fontFamily="@font/samliphopangche"
             android:id="@+id/tv_login_pw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,18 +87,22 @@
             android:textStyle="bold" />
 
         <EditText
+            android:textColor="#003A9A"
+            android:fontFamily="@font/samliphopangche"
             android:id="@+id/et_login_pw"
             android:layout_width="310dp"
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/shape_login"
             android:paddingStart="17dp"
-            android:paddingTop="17dp"
-            android:paddingBottom="9dp" />
+            android:inputType="textPassword"
+             />
+
 
     </LinearLayout>
 
     <TextView
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/tv_login_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,6 +116,7 @@
         app:layout_constraintTop_toBottomOf="@id/ll_login_pw" />
 
     <Button
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/btn_login"
         android:layout_width="320dp"
         android:layout_height="50dp"
@@ -120,6 +131,7 @@
         app:layout_constraintTop_toBottomOf="@id/ll_login_pw" />
 
     <Button
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/btn_create_account"
         android:layout_width="320dp"
         android:layout_height="50dp"
@@ -134,6 +146,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <TextView
+        android:fontFamily="@font/samliphopangche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"

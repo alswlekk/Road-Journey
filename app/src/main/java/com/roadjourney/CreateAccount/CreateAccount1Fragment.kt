@@ -60,15 +60,19 @@ class CreateAccount1Fragment : Fragment() {
                 binding.tvPwCheckError.visibility = View.GONE
             }
 
-            if (binding.etCreateAccountPw.text.length < 10) {
+            // 비밀번호 검증 정규식: 영문, 숫자, 특수문자를 각각 최소 1개 포함하고 10자 이상
+            val passwordPattern = Regex("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{10,}$")
+
+            if (!passwordPattern.matches(binding.etCreateAccountPw.text.toString())) {
                 binding.tvPwError.visibility = View.VISIBLE
             } else {
                 binding.tvPwError.visibility = View.GONE
             }
 
+
             if (binding.etCreateAccountPw.text.toString()
                     .equals(binding.etCreateAccountPwCheck.text.toString())
-                && binding.etCreateAccountPw.text.length >= 10 ) {
+                && passwordPattern.matches(binding.etCreateAccountPw.text.toString()) ) {
                 // 다음 화면으로 이동
                 requireActivity().supportFragmentManager
                     .beginTransaction()

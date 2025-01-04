@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".CreateAccount.CreateAccount1Fragment">
 
     <ImageView
@@ -65,6 +66,7 @@
             android:textSize="16sp" />
 
         <EditText
+            android:textColor="#003A9A"
             android:id="@+id/et_create_account_id"
             android:layout_width="310dp"
             android:layout_height="50dp"
@@ -107,6 +109,8 @@
             android:textSize="16sp" />
 
         <EditText
+            android:inputType="textPassword"
+            android:textColor="#003A9A"
             android:id="@+id/et_create_account_pw"
             android:layout_width="310dp"
             android:layout_height="50dp"
@@ -147,6 +151,8 @@
             android:textSize="16sp" />
 
         <EditText
+            android:inputType="textPassword"
+            android:textColor="#003A9A"
             android:id="@+id/et_create_account_pw_check"
             android:layout_width="310dp"
             android:layout_height="50dp"
@@ -188,6 +194,7 @@
             android:textSize="16sp" />
 
         <EditText
+            android:textColor="#003A9A"
             android:id="@+id/et_create_account_email"
             android:layout_width="310dp"
             android:layout_height="50dp"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".CreateAccount.CreateAccount3Fragment">
 
     <ImageView
@@ -35,6 +36,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_top_count1" />
 
     <TextView
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/tv_request_profile_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,6 +71,7 @@
         />
 
     <Button
+        android:fontFamily="@font/samliphopangche"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:background="@drawable/shape_fill_blue_15"
@@ -83,6 +86,7 @@
         />
 
     <TextView
+        android:fontFamily="@font/samliphopangche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="상태메시지"
@@ -96,6 +100,7 @@
         />
 
     <EditText
+        android:fontFamily="@font/samliphopangche"
         android:layout_width="310dp"
         android:layout_height="150dp"
         android:background="@drawable/shape_fill_blue_20"
@@ -108,6 +113,7 @@
         />
 
     <Button
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/btn_next_filled"
         android:layout_width="320dp"
         android:layout_height="60dp"
