@@ -6,9 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".AddGoalActivity">
+    tools:context=".AddGoal.AddGoalActivity">
 
     <ScrollView
+        android:id="@+id/sv_add_goal"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_add_goal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -184,6 +186,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_add_goal_date" />
 
             <TextView
+                android:id="@+id/tv_add_goal_repeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="반복"
@@ -278,7 +281,7 @@
                 android:id="@+id/et_add_goal_detail"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@drawable/shape_fill_gray_20"
+                android:background="@drawable/shape_fill_gray_10"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="20dp"
                 android:gravity="start|top"
@@ -351,6 +354,38 @@
                 android:layout_marginStart="240dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_add_goal_type" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_add_goal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginHorizontal="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_add_goal_check"/>
+
+            <ImageView
+                android:id="@+id/iv_add_goal_plus"
+                android:src="@drawable/ic_plus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="invisible"
+                android:layout_marginEnd="13dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@id/iv_add_goal_minus"
+                app:layout_constraintTop_toBottomOf="@id/rv_add_goal"/>
+
+            <ImageView
+                android:id="@+id/iv_add_goal_minus"
+                android:src="@drawable/ic_minus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="invisible"
+                android:layout_marginEnd="27dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_add_goal"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_add_goal_share"
