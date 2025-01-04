@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="ArchiveActivity">
+    tools:context=".Archive.ArchiveActivity">
 
     <ImageView
         android:id="@+id/iv_archive_back"
@@ -156,10 +156,22 @@
         app:layout_constraintTop_toBottomOf="@id/iv_archive_back" />
 
     <View
+        android:id="@+id/v_archive"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray3"
         android:layout_marginTop="13dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sp_archive_array" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_archive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_archive"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
