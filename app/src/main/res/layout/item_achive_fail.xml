@@ -1,0 +1,121 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_background_fail">
+
+    <TextView
+        android:id="@+id/tv_archive_goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="Goal 1"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/blue2"
+        android:textSize="14sp"
+        android:layout_marginStart="13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_archive_star1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_star"
+        android:layout_marginTop="9dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_archive_goal"/>
+
+    <ImageView
+        android:id="@+id/iv_archive_star2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_star"
+        android:layout_marginTop="9dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_archive_star1"/>
+
+    <ImageView
+        android:id="@+id/iv_archive_star3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_star"
+        android:layout_marginTop="9dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_archive_star2"/>
+
+    <ImageView
+        android:id="@+id/iv_archive_star4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_star"
+        android:layout_marginTop="9dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_archive_star3"/>
+
+    <ImageView
+        android:id="@+id/iv_archive_star5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_star"
+        android:layout_marginTop="9dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_archive_star4"/>
+
+    <TextView
+        android:id="@+id/tv_archive_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:text="자기소개서 제출 마감"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/gray1"
+        android:textSize="17sp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_archive_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="66dp"
+        android:text="등록일 : 2024.01.26"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/gray4"
+        android:textSize="14sp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_archive_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="진행도 : 80%"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/gray1"
+        android:textSize="17sp"
+        android:layout_marginEnd="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/pb_archive"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="82dp"
+        android:layout_height="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:max="100"
+        android:progress="80"
+        android:progressDrawable="@drawable/progress_bar_goal"
+        app:layout_constraintTop_toBottomOf="@id/tv_archive_progress"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
