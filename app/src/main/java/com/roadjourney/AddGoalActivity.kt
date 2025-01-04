@@ -11,11 +11,14 @@ import androidx.fragment.app.Fragment
 import com.roadjourney.Home.HomeFragment
 import com.roadjourney.databinding.ActivityAddGoalBinding
 import com.roadjourney.databinding.DialogGoalTypeBinding
+import com.roadjourney.databinding.DialogSaveBinding
 
 class AddGoalActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddGoalBinding
     private val starStates = BooleanArray(5)
+    private var isGoalShare = false
+    private var isGoalFriend = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,16 @@ class AddGoalActivity : AppCompatActivity() {
         binding.tvAddGoalLong.setOnClickListener {
             goalTypeDialog()
         }
+
+        binding.ivAddGoalShareBtn.setOnClickListener {
+            isGoalShare = !isGoalShare
+            updateToggleImage(binding.ivAddGoalShareBtn, isGoalShare)
+        }
+
+        binding.ivAddGoalFriendBtn.setOnClickListener {
+            isGoalFriend = !isGoalFriend
+            updateToggleImage(binding.ivAddGoalFriendBtn, isGoalFriend)
+        }
     }
 
     private fun goalTypeDialog() {
@@ -80,6 +93,7 @@ class AddGoalActivity : AppCompatActivity() {
             }
             binding.tvAddGoalLong.text = selectedText
             dialog.dismiss()
+            showSaveDialog()
         }
 
         dialogBinding.ivGoalTypeCancel.setOnClickListener {
@@ -89,6 +103,19 @@ class AddGoalActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    private fun showSaveDialog() {
+        val saveDialogBinding = DialogSaveBinding.inflate(LayoutInflater.from(this))
+        val saveDialog = AlertDialog.Builder(this)
+            .setView(saveDialogBinding.root)
+            .setCancelable(false)
+            .create()
+
+        saveDialogBinding.tvSaveBtn.setOnClickListener {
+            saveDialog.dismiss()
+        }
+
+        saveDialog.show()
+    }
 
     private fun setupTextWatchers() {
         val textWatcher = object : TextWatcher {
@@ -133,5 +160,14 @@ class AddGoalActivity : AppCompatActivity() {
             .replace(R.id.main, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun updateToggleImage(imageView: ImageView, isEnabled: Boolean) {
+        val newImageRes = if (isEnabled) {
+            R.drawable.ic_toggle_on
+        } else {
+            R.drawable.ic_toggle_off
+        }
+        imageView.setImageResource(newImageRes)
     }
 }
