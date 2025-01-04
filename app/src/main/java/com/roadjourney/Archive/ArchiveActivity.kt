@@ -1,4 +1,4 @@
-package com.roadjourney
+package com.roadjourney.Archive
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,8 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.roadjourney.R
 import com.roadjourney.databinding.ActivityArchiveBinding
 
 class ArchiveActivity : AppCompatActivity() {
@@ -19,6 +21,7 @@ class ArchiveActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupClickListeners()
+        setupRecyclerView()
 
         val archieveCategories = listOf("전체", "성공", "실패")
         setupSpinner(binding.spArchiveArchieve, archieveCategories, 70)
@@ -36,6 +39,19 @@ class ArchiveActivity : AppCompatActivity() {
     private fun setupClickListeners() {
         binding.ivArchiveBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun setupRecyclerView() {
+        val archiveItems = listOf(
+            ArchiveItem("Goal 1", "자기소개서 제출 마감", "2024.01.26", 80),
+            ArchiveItem("Goal 2", "영어 단어 암기", "2024.01.20", 60),
+            ArchiveItem("Goal 3", "체력 훈련", "2024.01.15", 40)
+        )
+
+        binding.rvArchive.apply {
+            layoutManager = LinearLayoutManager(this@ArchiveActivity)
+            adapter = ArchiveAdapter(archiveItems)
         }
     }
 

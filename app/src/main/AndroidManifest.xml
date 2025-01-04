@@ -50,7 +50,7 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".ArchiveActivity"
+            android:name=".Archive.ArchiveActivity"
             android:exported="false">
         </activity>
     </application>
