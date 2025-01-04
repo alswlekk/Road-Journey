@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/fragment_shop"
-        android:name="com.roadjourney.ShopFragment"
+        android:name="com.roadjourney.Shop.ShopFragment"
         android:label="쇼핑" />
 
     <fragment

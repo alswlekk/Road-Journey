@@ -23,8 +23,8 @@ class ArchiveActivity : AppCompatActivity() {
         setupClickListeners()
         setupRecyclerView()
 
-        val archieveCategories = listOf("전체", "성공", "실패")
-        setupSpinner(binding.spArchiveArchieve, archieveCategories, 70)
+        val archiveCategories = listOf("전체", "성공", "실패")
+        setupSpinner(binding.spArchiveArchieve, archiveCategories, 70)
 
         val typeCategories = listOf("전체", "반복", "단기", "장기")
         setupSpinner(binding.spArchiveType, typeCategories, 70)
