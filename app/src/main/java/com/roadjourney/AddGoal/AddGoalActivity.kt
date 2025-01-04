@@ -181,14 +181,6 @@ class AddGoalActivity : AppCompatActivity() {
         }
     }
 
-    private fun getAdditionalGoalsData(): List<String> {
-        return listOf("Step 1", "Step 2")
-    }
-
-    private fun getChecklistGoalsData(): List<String> {
-        return listOf("Sub Goal 1", "Sub Goal 2", "Sub Goal 3")
-    }
-
     private fun goalTypeDialog() {
         val dialogBinding = DialogGoalTypeBinding.inflate(LayoutInflater.from(this))
         val dialog = AlertDialog.Builder(this)
