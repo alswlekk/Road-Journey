@@ -5,15 +5,88 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ShopFragment">
+    tools:context=".Shop.ShopFragment">
 
     <TextView
+        android:id="@+id/tv_shop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="shop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="상점"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/blue2"
+        android:textSize="32sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/iv_shop_coin"
+        android:layout_width="35dp"
+        android:layout_height="34dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_coin"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="74dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_shop_coin"
+        android:layout_width="53dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="14dp"
+        android:text="1500"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_shop_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카테고리 :"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/blue2"
+        android:textSize="18sp"
+        android:layout_marginTop="29dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_shop" />
+
+    <Spinner
+        android:id="@+id/sp_shop"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="9dp"
+        style="@style/Widget.My.Spinner"
+        android:spinnerMode="dropdown"
+        android:padding="0dp"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/white"
+        android:popupBackground="@color/white"
+        android:dropDownWidth="120dp"
+        app:layout_constraintStart_toEndOf="@id/tv_shop_category"
+        app:layout_constraintTop_toBottomOf="@id/tv_shop" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_shop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="9dp"
+        android:clipToPadding="false"
+        android:paddingStart="15dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        app:layout_constraintTop_toBottomOf="@id/sp_shop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
