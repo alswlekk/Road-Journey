@@ -1,14 +1,18 @@
-package com.roadjourney
+package com.roadjourney.AddGoal
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.roadjourney.Home.HomeFragment
+import com.roadjourney.R
 import com.roadjourney.databinding.ActivityAddGoalBinding
 import com.roadjourney.databinding.DialogGoalTypeBinding
 import com.roadjourney.databinding.DialogSaveBinding
@@ -27,6 +31,7 @@ class AddGoalActivity : AppCompatActivity() {
 
         setupClickListeners()
         setupTextWatchers()
+        setupRecyclerView()
     }
 
     private fun setupClickListeners() {
@@ -66,6 +71,122 @@ class AddGoalActivity : AppCompatActivity() {
             isGoalFriend = !isGoalFriend
             updateToggleImage(binding.ivAddGoalFriendBtn, isGoalFriend)
         }
+
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvAddGoal.layoutManager = LinearLayoutManager(this)
+
+        val normalButton = binding.tvAddGoalNormal
+        val additionalButton = binding.tvAddGoalAddtional
+        val checklistButton = binding.tvAddGoalCheck
+
+        val buttons = listOf(normalButton, additionalButton, checklistButton)
+        val recyclerView = binding.rvAddGoal
+        val btnPlus = binding.ivAddGoalPlus
+        val btnMinus = binding.ivAddGoalMinus
+
+        val additionalGoals = mutableListOf("Step 1", "Step 2")
+        val checklistGoals = mutableListOf("Sub Goal 1", "Sub Goal 2", "Sub Goal 3")
+
+        var currentGoals: MutableList<String>? = null
+        var currentAdapter: GoalAdapter? = null
+
+        normalButton.setOnClickListener {
+            updateButtonStyles(normalButton, buttons)
+            recyclerView.visibility = View.GONE
+            btnMinus.visibility = View.GONE
+            btnPlus.visibility = View.GONE
+            currentGoals = null
+            currentAdapter = null
+            updateLayoutConstraints(false)
+        }
+
+        additionalButton.setOnClickListener {
+            updateButtonStyles(additionalButton, buttons)
+            currentGoals = additionalGoals
+            currentAdapter = GoalAdapter(currentGoals!!)
+            recyclerView.adapter = currentAdapter
+            recyclerView.visibility = View.VISIBLE
+            btnMinus.visibility = View.VISIBLE
+            btnPlus.visibility = View.VISIBLE
+            updateLayoutConstraints(true)
+        }
+
+        checklistButton.setOnClickListener {
+            updateButtonStyles(checklistButton, buttons)
+            currentGoals = checklistGoals
+            currentAdapter = GoalAdapter(currentGoals!!)
+            recyclerView.adapter = currentAdapter
+            recyclerView.visibility = View.VISIBLE
+            btnMinus.visibility = View.VISIBLE
+            btnPlus.visibility = View.VISIBLE
+            updateLayoutConstraints(true)
+        }
+
+        btnPlus.setOnClickListener {
+            currentGoals?.let { goals ->
+                val newGoal = if (goals === additionalGoals) {
+                    "Step ${goals.size + 1}"
+                } else {
+                    "Sub Goal ${goals.size + 1}"
+                }
+                goals.add(newGoal)
+                currentAdapter?.notifyItemInserted(goals.size - 1)
+            }
+        }
+
+        btnMinus.setOnClickListener {
+            currentGoals?.let { goals ->
+                if (goals.isNotEmpty()) {
+                    val lastIndex = goals.size - 1
+                    goals.removeAt(lastIndex)
+                    currentAdapter?.notifyItemRemoved(lastIndex)
+                }
+            }
+        }
+    }
+
+
+    private fun updateLayoutConstraints(isRecyclerViewVisible: Boolean) {
+        val constraintSet = androidx.constraintlayout.widget.ConstraintSet()
+        constraintSet.clone(binding.clAddGoal)
+
+        if (isRecyclerViewVisible) {
+            constraintSet.connect(
+                R.id.cl_add_goal_share,
+                androidx.constraintlayout.widget.ConstraintSet.TOP,
+                R.id.iv_add_goal_minus,
+                androidx.constraintlayout.widget.ConstraintSet.BOTTOM,
+                60
+            )
+        } else {
+            constraintSet.connect(
+                R.id.cl_add_goal_share,
+                androidx.constraintlayout.widget.ConstraintSet.TOP,
+                R.id.tv_add_goal_normal,
+                androidx.constraintlayout.widget.ConstraintSet.BOTTOM,
+                20
+            )
+        }
+
+        constraintSet.applyTo(binding.clAddGoal)
+    }
+
+    private fun updateButtonStyles(selectedButton: TextView, buttons: List<TextView>) {
+        buttons.forEach { button ->
+            button.setBackgroundResource(
+                if (button == selectedButton) R.drawable.shape_fill_blue1_10 else R.drawable.shape_fill_blue8_10
+            )
+        }
+    }
+
+    private fun getAdditionalGoalsData(): List<String> {
+        return listOf("Step 1", "Step 2")
+    }
+
+    private fun getChecklistGoalsData(): List<String> {
+        return listOf("Sub Goal 1", "Sub Goal 2", "Sub Goal 3")
     }
 
     private fun goalTypeDialog() {
