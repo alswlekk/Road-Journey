@@ -41,6 +41,7 @@ class CreateAccount2Fragment : Fragment() {
                     binding.btnNextUnfilled.visibility = View.VISIBLE
                 }
             }
+
             override fun afterTextChanged(s: Editable?) {}
         }
 

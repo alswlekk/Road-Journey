@@ -5,83 +5,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".FriendFragment">
+    tools:context=".Friend.FriendFragment">
 
     <TextView
         android:id="@+id/tv_friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="친구"
-        android:textSize="26sp"
-        android:fontFamily="@font/samliphopangche"
-        android:textColor="@color/blue2"
         android:layout_marginStart="24dp"
         android:layout_marginTop="22dp"
-        />
+        android:fontFamily="@font/samliphopangche"
+        android:text="친구"
+        android:textColor="@color/blue2"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_edit_friend"
         android:layout_width="49dp"
         android:layout_height="49dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="13dp"
         android:background="@drawable/ic_create_account_profile"
         android:backgroundTint="@color/blue1"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/iv_edit_friend"
-        app:layout_constraintTop_toTopOf="@+id/iv_edit_friend"
         android:background="@drawable/ic_edit_friend"
-        app:layout_constraintEnd_toEndOf="@id/iv_edit_friend"
         app:layout_constraintBottom_toBottomOf="@id/iv_edit_friend"
-        />
+        app:layout_constraintEnd_toEndOf="@id/iv_edit_friend"
+        app:layout_constraintStart_toStartOf="@id/iv_edit_friend"
+        app:layout_constraintTop_toTopOf="@+id/iv_edit_friend" />
 
     <TextView
-        android:fontFamily="@font/samliphopangche"
+        android:id="@+id/tv_sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25.4dp"
+        android:fontFamily="@font/samliphopangche"
         android:text="정렬"
-        android:id="@+id/tv_sort"
         android:textColor="@color/blue2"
         android:textSize="17sp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_friend"
-        android:layout_marginTop="25.4dp"
         app:layout_constraintStart_toStartOf="@id/tv_friend"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tv_friend" />
 
     <Spinner
         android:id="@+id/sp_sort"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="67dp"
         style="@style/Widget.My.Spinner"
         android:layout_width="120dp"
         android:layout_height="30dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="67dp"
+        android:dropDownWidth="120dp"
         android:fontFamily="@font/samliphopangche"
-        android:spinnerMode="dropdown"
         android:paddingStart="0dp"
-        android:textAlignment="center"
         android:popupBackground="@color/white"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:dropDownWidth="120dp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-    <androidx.fragment.app.FragmentContainerView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_friend"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@id/tv_sort"
         android:layout_marginTop="22dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tv_sort" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

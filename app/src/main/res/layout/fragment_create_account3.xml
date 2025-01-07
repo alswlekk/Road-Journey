@@ -36,12 +36,12 @@
         app:layout_constraintTop_toTopOf="@+id/iv_top_count1" />
 
     <TextView
-        android:fontFamily="@font/samliphopangche"
         android:id="@+id/tv_request_profile_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="62dp"
+        android:fontFamily="@font/samliphopangche"
         android:text="프로필을 설정해주세요."
         android:textColor="@color/blue2"
         android:textSize="24sp"
@@ -52,74 +52,69 @@
         android:id="@+id/iv_profile_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tv_request_profile_text"
         android:layout_marginTop="75dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_create_account_profile"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_request_profile_text" />
 
     <ImageView
-        android:layout_marginTop="21dp"
-        android:src="@drawable/ic_person"
         android:id="@+id/iv_profile_foreground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/iv_profile_background"
-        app:layout_constraintStart_toStartOf="@id/iv_profile_background"
+        android:layout_marginTop="21dp"
+        android:src="@drawable/ic_person"
         app:layout_constraintEnd_toEndOf="@id/iv_profile_background"
-        />
+        app:layout_constraintStart_toStartOf="@id/iv_profile_background"
+        app:layout_constraintTop_toTopOf="@id/iv_profile_background" />
 
     <Button
-        android:fontFamily="@font/samliphopangche"
+        android:id="@+id/btn_add_photo"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:background="@drawable/shape_fill_blue_15"
-        android:text="사진 추가"
-        app:layout_constraintTop_toBottomOf="@id/iv_profile_background"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="29dp"
+        android:background="@drawable/shape_fill_blue_15"
+        android:fontFamily="@font/samliphopangche"
+        android:text="사진 추가"
         android:textSize="20sp"
         app:backgroundTint="@null"
-        android:id="@+id/btn_add_photo"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_profile_background" />
 
     <TextView
-        android:fontFamily="@font/samliphopangche"
+        android:id="@+id/tv_state_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/samliphopangche"
         android:text="상태메시지"
         android:textColor="@color/blue6"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/btn_add_photo"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="25dp"
-        android:id="@+id/tv_state_message"
-        />
+        app:layout_constraintTop_toBottomOf="@id/btn_add_photo" />
 
     <EditText
-        android:fontFamily="@font/samliphopangche"
         android:layout_width="310dp"
         android:layout_height="150dp"
-        android:background="@drawable/shape_fill_blue_20"
-        app:layout_constraintTop_toBottomOf="@id/tv_state_message"
-        app:layout_constraintStart_toStartOf="@id/tv_state_message"
         android:layout_marginTop="10dp"
+        android:background="@drawable/shape_fill_blue_20"
+        android:fontFamily="@font/samliphopangche"
         android:hint="상태메시지가 없습니다."
-        android:paddingBottom="100dp"
         android:paddingStart="16dp"
-        />
+        android:paddingBottom="100dp"
+        app:layout_constraintStart_toStartOf="@id/tv_state_message"
+        app:layout_constraintTop_toBottomOf="@id/tv_state_message" />
 
     <Button
-        android:fontFamily="@font/samliphopangche"
-        android:id="@+id/btn_next_filled"
+        android:id="@+id/btn_finish"
         android:layout_width="320dp"
         android:layout_height="60dp"
         android:layout_marginTop="76dp"
         android:layout_marginBottom="34dp"
         android:background="@drawable/btn_next_filled"
+        android:fontFamily="@font/samliphopangche"
         android:text="완료하기"
         android:textColor="@color/white"
         android:textSize="24sp"

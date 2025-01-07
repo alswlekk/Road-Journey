@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/fragment_friend"
-        android:name="com.roadjourney.FriendFragment"
+        android:name="com.roadjourney.Friend.FriendFragment"
         android:label="친구" />
 
     <fragment

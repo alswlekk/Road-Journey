@@ -28,7 +28,14 @@ class AchievementActivity : AppCompatActivity() {
         setupSpinner(binding.spAchievementCategory, typeCategories)
 
         clickBackButton()
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fcv_achievement, AchievementGoalFragment())
+            .commit()
+
     }
+
 
     private fun setupSpinner(spAchievementCategory: Spinner, typeCategories: List<String>) {
         val adapter = object : ArrayAdapter<String>(this, R.layout.spinner_item, typeCategories) {
