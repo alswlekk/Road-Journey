@@ -1,4 +1,4 @@
-package com.roadjourney
+package com.roadjourney.Archive
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.roadjourney.R
 import com.roadjourney.databinding.ActivityArchiveBinding
 
 class ArchiveActivity : AppCompatActivity() {

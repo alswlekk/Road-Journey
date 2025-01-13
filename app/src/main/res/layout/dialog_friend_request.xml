@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_fill_white_30"
-    android:paddingBottom="26dp">
+    android:paddingBottom="25dp">
 
     <ImageView
         android:id="@+id/iv_friend_popup_close"
@@ -66,34 +66,34 @@
         app:layout_constraintTop_toBottomOf="@id/tv_friend_popup_id" />
 
     <Button
-        android:id="@+id/btn_visit"
-        android:layout_width="240dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="37dp"
-        android:background="@drawable/btn_next_filled"
+        android:id="@+id/btn_friend_popup_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:width="130dp"
+        android:height="50dp"
+        android:background="@drawable/shape_fill_blue1_25"
         android:fontFamily="@font/samliphopangche"
-        android:text="방문하기"
-        android:textColor="@color/white"
-        android:textSize="24sp"
+        android:text="수락"
+        android:textSize="20sp"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_friend_popup_quote" />
+
+    <Button
+        android:id="@+id/btn_friend_popup_reject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:width="130dp"
+        android:height="50dp"
+        android:background="@drawable/shape_fill_red2_25"
+        android:fontFamily="@font/samliphopangche"
+        android:text="거절"
+        android:textSize="20sp"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_friend_popup_quote" />
-
-    <TextView
-        android:id="@+id/tv_no_visit"
-        android:layout_width="240dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="37dp"
-        android:background="@drawable/btn_next_filled"
-        android:fontFamily="@font/samliphopangche"
-        android:gravity="center"
-        android:text="방문할 수 없는 프로필입니다"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:backgroundTint="@color/gray3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_friend_popup_quote" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tv_friend_popup_quote" />
 </androidx.constraintlayout.widget.ConstraintLayout>

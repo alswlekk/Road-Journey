@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Home.HomeFragment">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_home_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_friend_profile_background"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_friend_profile_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="13dp"
+                />
+            <TextView
+                android:id="@+id/tv_home_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가나다"
+                android:fontFamily="@font/samliphopangche"
+                android:textColor="@color/blue2"
+                android:textSize="23sp"
+                android:layout_marginTop="16dp"
+
+                app:layout_constraintStart_toEndOf="@id/iv_friend_profile_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/pb_home"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="72dp"
+                android:max="100"
+                android:progress="40"
+                android:progressDrawable="@drawable/progress_bar_home"
+                app:layout_constraintTop_toBottomOf="@id/tv_home_name"/>
+
+            <TextView
+                android:id="@+id/tv_home_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="950/1300"
+                android:fontFamily="@font/samliphopangche"
+                android:textColor="@color/blue1"
+                android:textSize="14sp"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pb_home" />
+
+            <ImageView
+                android:id="@+id/iv_home_cicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_home_circle"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="11dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_home_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_home_clock"
+                android:layout_marginVertical="7dp"
+                android:layout_marginHorizontal="7dp"
+                app:layout_constraintTop_toTopOf="@id/iv_home_cicle"
+                app:layout_constraintBottom_toBottomOf="@id/iv_home_cicle"
+                app:layout_constraintEnd_toEndOf="@id/iv_home_cicle"
+                app:layout_constraintStart_toStartOf="@id/iv_home_cicle"/>
+
+            <ImageView
+                android:id="@+id/iv_home_dog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_profile_cat"
+                android:layout_marginTop="128dp"
+                android:layout_marginStart="56dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/ll_home_radio"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:background="@drawable/segmented_background"
+                android:layout_marginTop="21dp"
+                android:paddingHorizontal="2dp"
+                android:paddingVertical="3dp"
+                android:layout_marginHorizontal="8dp"
+                app:layout_constraintTop_toBottomOf="@id/iv_home_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <RadioGroup
+                    android:id="@+id/rg_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_repeat"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/segmented_item_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="반복"
+                        android:fontFamily="@font/samliphopangche"
+                        android:textColor="@drawable/segmented_text_selector"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_short"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/segmented_item_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="단기"
+                        android:fontFamily="@font/samliphopangche"
+                        android:textColor="@drawable/segmented_text_selector"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_long"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/segmented_item_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="장기"
+                        android:fontFamily="@font/samliphopangche"
+                        android:textColor="@drawable/segmented_text_selector"
+                        android:textSize="16sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_home_radio"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/iv_blank_heart"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="11dp"
+        android:src="@drawable/ic_friend_blank_heart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_filled_heart"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="11dp"
+        android:src="@drawable/ic_friend_filled_heart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

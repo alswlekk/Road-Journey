@@ -66,13 +66,13 @@
         app:layout_constraintTop_toBottomOf="@id/tv_friend_popup_id" />
 
     <Button
-        android:id="@+id/btn_visit"
+        android:id="@+id/btn_friend_request"
         android:layout_width="240dp"
         android:layout_height="52dp"
         android:layout_marginTop="37dp"
         android:background="@drawable/btn_next_filled"
         android:fontFamily="@font/samliphopangche"
-        android:text="방문하기"
+        android:text="친구 요청하기"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:backgroundTint="@null"
@@ -81,16 +81,34 @@
         app:layout_constraintTop_toBottomOf="@id/tv_friend_popup_quote" />
 
     <TextView
-        android:id="@+id/tv_no_visit"
+        android:id="@+id/tv_friend_request_wait"
         android:layout_width="240dp"
         android:layout_height="52dp"
         android:layout_marginTop="37dp"
         android:background="@drawable/btn_next_filled"
         android:fontFamily="@font/samliphopangche"
         android:gravity="center"
-        android:text="방문할 수 없는 프로필입니다"
+        android:text="친구 요청 대기 중"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:visibility="gone"
+        app:backgroundTint="@color/gray3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_friend_popup_quote" />
+
+    <TextView
+        android:id="@+id/tv_friend_already"
+        android:layout_width="240dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="37dp"
+        android:background="@drawable/btn_next_filled"
+        android:fontFamily="@font/samliphopangche"
+        android:gravity="center"
+        android:text="이미 친구인 사용자입니다."
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone"
         app:backgroundTint="@color/gray3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

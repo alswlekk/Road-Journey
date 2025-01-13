@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoadJourney"
         tools:targetApi="31">
-        <activity
-            android:name=".activity_splash"
-            android:exported="false" />
-        <activity
-            android:name=".Login.LoginActivity"
+        <activity android:name=".Login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,33 +20,39 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".CreateAccount.CreateAccountActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".MyPage.AccountManagementActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".MyPage.AchievementActivity"
-            android:exported="false"></activity>
+        <activity android:name=".CreateAccount.CreateAccountActivity"
+            android:exported="false">
+        </activity>
+        <activity android:name=".MyPage.AccountManagementActivity"
+            android:exported="false">
+        </activity>
+        <activity android:name=".MyPage.AchievementActivity"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".MyPage.ProfileActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".MyPage.ItemActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".MyPage.SettingActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
             android:name=".AddGoal.AddGoalActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+        </activity>
         <activity
-            android:name=".ArchiveActivity"
-            android:exported="false"></activity>
+            android:name=".Archive.ArchiveActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

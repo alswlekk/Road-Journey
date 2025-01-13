@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Friend.FriendManagementFragment">
+
+    <ImageView
+        android:id="@+id/iv_friend_management_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_account_manage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="친구 관리"
+        android:textColor="@color/blue2"
+        android:textSize="32sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_friend_management_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_account_manage"
+        >
+
+        <TextView
+            android:layout_marginStart="20dp"
+            android:id="@+id/tv_message_filled"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="받은 메시지"
+            android:gravity="center"
+            android:fontFamily="@font/samliphopangche"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_fill_blue1_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_friend_filled"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="친구 요청"
+            android:gravity="center"
+            android:fontFamily="@font/samliphopangche"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_fill_blue1_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="130dp"
+           />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_search_filled"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="친구 검색"
+            android:gravity="center"
+            android:fontFamily="@font/samliphopangche"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_fill_blue1_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:visibility="gone"
+            android:layout_marginStart="20dp"
+            android:id="@+id/tv_message_unfilled"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="받은 메시지"
+            android:gravity="center"
+            android:fontFamily="@font/samliphopangche"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_fill_blue8_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/tv_friend_unfilled"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="친구 요청"
+            android:gravity="center"
+            android:fontFamily="@font/samliphopangche"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_fill_blue8_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="130dp"
+            />
+
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/tv_search_unfilled"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="친구 검색"
+            android:gravity="center"
+            android:fontFamily="@font/samliphopangche"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_fill_blue8_10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="175dp"
+        android:id="@+id/fcv_friend_management"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

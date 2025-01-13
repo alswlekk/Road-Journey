@@ -281,7 +281,7 @@
                 android:id="@+id/et_add_goal_detail"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@drawable/shape_fill_gray_10"
+                android:background="@drawable/shape_fill_gray1_10"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="20dp"
                 android:gravity="start|top"
