@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.roadjourney.AddGoalActivity
+import com.roadjourney.AddGoal.AddGoalActivity
+import com.roadjourney.ArchiveActivity
 import com.roadjourney.R
 import com.roadjourney.databinding.FragmentHomeBinding
 
@@ -35,6 +36,11 @@ class HomeFragment : Fragment() {
     private fun setupClickListeners() {
         binding.ivHomeAdd.setOnClickListener {
             val intent = Intent(requireContext(), AddGoalActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.ivHomeCicle.setOnClickListener {
+            val intent = Intent(requireContext(), ArchiveActivity::class.java)
             startActivity(intent)
         }
     }

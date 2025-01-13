@@ -42,8 +42,8 @@ class ItemActivity : AppCompatActivity() {
                 val view = super.getDropDownView(position, convertView, parent) as TextView
 
                 when (position) {
-                    0 -> view.setBackgroundResource(R.drawable.spinner_dropdown_background_top) // 맨 위 항목
-                    count - 1 -> view.setBackgroundResource(R.drawable.spinner_dropdown_background_bottom) // 맨 아래 항목
+                    0 -> view.setBackgroundResource(R.drawable.spinner_dropdown_background_top)
+                    count - 1 -> view.setBackgroundResource(R.drawable.spinner_dropdown_background_bottom)
 
                 }
 

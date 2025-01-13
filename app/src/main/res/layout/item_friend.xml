@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <ImageView
+        android:id="@+id/iv_friend_rc_background"
+        android:layout_width="390dp"
+        android:layout_height="150dp"
+        android:background="@drawable/shape_friend_rc_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_friend_rc_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/img_friend_profile1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_friend_rc_background" />
+
+    <TextView
+        android:id="@+id/tv_friend_rc_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="가나다"
+        android:textColor="@color/blue2"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_friend_rc_profile"
+        app:layout_constraintStart_toStartOf="@id/iv_friend_rc_profile"
+        app:layout_constraintTop_toBottomOf="@id/iv_friend_rc_profile" />
+
+    <TextView
+        android:id="@+id/tv_friend_rc_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="성공은 도전하는 자에게만 찾아온다"
+        android:textColor="#777777"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/tv_friend_rc_name"
+        app:layout_constraintTop_toTopOf="@id/tv_friend_rc_name" />
+
+    <TextView
+        android:id="@+id/tv_friend_rc_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="14dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="최근 접속 : 1시간 전"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_friend_rc_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_friend_rc_goal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="달성 목표 : 34개"
+        android:textColor="@color/blue1"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_friend_rc_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_friend_rc_time" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
