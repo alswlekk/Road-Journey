@@ -67,7 +67,7 @@
         android:id="@+id/et_goal_detail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/shape_fill_gray_10"
+        android:background="@drawable/shape_fill_gray1_10"
         android:layout_marginTop="11dp"
         android:gravity="start|top"
         android:padding="16dp"

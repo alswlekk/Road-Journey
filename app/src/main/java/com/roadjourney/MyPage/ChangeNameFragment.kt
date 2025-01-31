@@ -48,5 +48,6 @@ class ChangeNameFragment : Fragment() {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+
     }
 }
