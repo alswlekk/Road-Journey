@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".MyPage.ChangeEmailFragment">
 
     <ImageView
@@ -43,6 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_change_email_back" />
 
     <EditText
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/et_email_change"
         android:layout_width="310dp"
         android:layout_height="60dp"
@@ -52,7 +54,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_email_change"
-        android:hint="확인해보기 위한 것"
         android:gravity="center"
         android:textColor="#003A9A"
         />

@@ -1,5 +1,6 @@
 package com.roadjourney.CreateAccount
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import com.roadjourney.Login.LoginActivity
 import com.roadjourney.R
 import com.roadjourney.databinding.ActivityCreateAccountBinding
+import com.roadjourney.databinding.DialogSuccessCreateAccountBinding
 import com.roadjourney.databinding.FragmentCreateAccount3Binding
 
 class CreateAccount3Fragment : Fragment() {
@@ -19,14 +21,25 @@ class CreateAccount3Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCreateAccount3Binding.inflate(layoutInflater)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.btnNextFilled.setOnClickListener {
-            // 로그인창으로 이동
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(intent)
-        }
+        binding.btnFinish.setOnClickListener {
+            val successDialogBinding =
+                DialogSuccessCreateAccountBinding.inflate(LayoutInflater.from(requireContext()))
+            val successDialog = AlertDialog.Builder(requireContext())
+                .setView(successDialogBinding.root)
+                .create()
+
+            successDialogBinding.btnFinish.setOnClickListener {
+                successDialog.dismiss()
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                startActivity(intent)
+            }
+
+            successDialog.show()
         }
     }
+}

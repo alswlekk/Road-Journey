@@ -5,28 +5,29 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MyPage.AchievementActivity">
 
     <ImageView
         android:id="@+id/iv_achievement_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_profile_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="도전 과제"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/samliphopangche"
+        android:text="도전 과제"
         android:textColor="@color/blue2"
         android:textSize="32sp"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@id/iv_achievement_back"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,67 +35,45 @@
         android:id="@+id/cl_choose_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/iv_achievement_back"
+        android:layout_marginStart="23.65dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="23.65dp"
-        >
+        app:layout_constraintTop_toBottomOf="@id/iv_achievement_back">
 
         <TextView
+            android:id="@+id/tv_achievement_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:text="카테고리 : "
-            android:textSize="16sp"
             android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:id="@+id/tv_achievement_category"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_achievement_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_achievement_category"
             android:layout_marginStart="6.28dp"
-            android:id="@+id/cl_achievement_category"
-            >
+            app:layout_constraintStart_toEndOf="@id/tv_achievement_category"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="목표"
-                android:textSize="14.73sp"
-                android:textColor="@color/white"
+            <Spinner
+                android:id="@+id/sp_achievement_category"
+                style="@style/Widget.My.Spinner"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:dropDownWidth="120dp"
                 android:fontFamily="@font/samliphopangche"
-                android:background="@drawable/ic_achievement_category"
-                android:paddingStart="46.73dp"
-                android:paddingTop="6.41dp"
-                android:id="@+id/tv_achievement_goal"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                android:padding="0dp"
+                android:popupBackground="@color/white"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:visibility="gone"
-                android:id="@+id/rv_achievement_category_detail"
-                />
-            
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/tv_achievement_goal"
-                app:layout_constraintStart_toStartOf="@id/tv_achievement_goal"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="97.94dp"
-                android:src="@drawable/ic_detail_triangle"
-                />
-
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -103,17 +82,10 @@
         android:id="@+id/fcv_achievement"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@id/cl_choose_category"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="50dp"
-        />
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/cl_choose_category"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        />-->
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cl_choose_category" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

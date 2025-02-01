@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyPage.CheckPwFragment">
+    tools:context=".MyPage.CheckPwFragment"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/iv_check_pw_back"
@@ -43,6 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_check_pw_back" />
 
     <EditText
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/et_pw_check"
         android:layout_width="310dp"
         android:layout_height="60dp"
@@ -53,7 +55,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_pw_check"
-        android:hint="확인해보기 위한것"
         android:textColor="#003A9A"/>
 
     <Button

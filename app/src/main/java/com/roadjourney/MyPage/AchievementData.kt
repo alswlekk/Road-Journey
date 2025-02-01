@@ -1,7 +1,7 @@
 package com.roadjourney.MyPage
 
 data class AchievementData(
-    val achivementTitle : String,
-    val achivementMission : String,
-    val achivementReward : String,
+    val achievementTitle: String,
+    val achievementMission: String,
+    val achievementReward: String,
 )

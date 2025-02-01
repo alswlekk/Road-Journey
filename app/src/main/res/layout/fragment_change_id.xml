@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MyPage.ChangeIdFragment">
     <ImageView
@@ -42,6 +43,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_change_id_back" />
 
     <EditText
+        android:fontFamily="@font/samliphopangche"
         android:id="@+id/et_id_change"
         android:layout_width="310dp"
         android:layout_height="60dp"

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Login.FindId1Fragment">
+
+    <ImageView
+        android:id="@+id/iv_find_pw_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_find_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="비밀번호 찾기"
+        android:textColor="@color/blue2"
+        android:textSize="32sp"
+        app:layout_constraintStart_toEndOf="@id/iv_find_pw_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_find_pw_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="69dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="전송된 인증번호를 입력해주세요."
+        android:textColor="@color/blue2"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/iv_find_pw_back"
+        app:layout_constraintTop_toBottomOf="@id/iv_find_pw_back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#0A59DB"
+        android:textSize="16sp"
+        android:text="인증번호"
+        app:layout_constraintTop_toBottomOf="@id/tv_find_id_number"
+        android:id="@+id/tv_email"
+        android:fontFamily="@font/samliphopangche"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/et_check_number"
+
+        />
+
+
+
+    <EditText
+        android:fontFamily="@font/samliphopangche"
+        android:id="@+id/et_check_number"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/shape_login"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_find_pw_number"
+        android:hint="확인해보기 위한 것"
+        android:paddingStart="25dp"
+        android:textColor="#003A9A"
+        />
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:text="다시 보내기"
+        android:textSize="14sp"
+        app:backgroundTint="@null"
+        android:background="@drawable/shape_fill_blue1_15"
+        android:fontFamily="@font/samliphopangche"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@id/et_check_number"
+        app:layout_constraintBottom_toBottomOf="@id/et_check_number"
+        app:layout_constraintEnd_toEndOf="@id/et_check_number"
+        />
+
+    <Button
+        android:id="@+id/btn_check_unfilled"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/btn_next_unfilled"
+        android:fontFamily="@font/samliphopangche"
+        android:text="인증하기"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_check_filled"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/btn_next_filled"
+        android:fontFamily="@font/samliphopangche"
+        android:text="인증하기"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_number_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="인증번호가 일치하지 않습니다."
+        android:textColor="@color/red1"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_check_number" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

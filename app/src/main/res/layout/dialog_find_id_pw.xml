@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/shape_fill_white_30"
+    android:paddingBottom="17dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="아이디/비밀번호 찾기"
+        android:id="@+id/tv_find_id_pw_popup"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#468CFF"
+        />
+
+    <Button
+        android:id="@+id/btn_find_id"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="37dp"
+        android:background="@drawable/btn_next_filled"
+        android:fontFamily="@font/samliphopangche"
+        android:text="아이디 찾기"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_find_id_pw_popup" />
+
+    <Button
+        android:id="@+id/btn_find_pw"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_next_filled"
+        android:fontFamily="@font/samliphopangche"
+        android:text="비밀번호 찾기"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:backgroundTint="#4A72F5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_find_id" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
