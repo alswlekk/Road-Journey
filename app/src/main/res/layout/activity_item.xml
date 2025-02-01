@@ -62,5 +62,4 @@
         app:layout_constraintStart_toEndOf="@id/tv_item_message"
         app:layout_constraintTop_toBottomOf="@id/iv_item_back" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

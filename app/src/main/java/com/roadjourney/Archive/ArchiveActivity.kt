@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.app.AppCompatActivity
 import com.roadjourney.R
 import com.roadjourney.databinding.ActivityArchiveBinding
@@ -20,9 +21,10 @@ class ArchiveActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupClickListeners()
+        setupRecyclerView()
 
-        val archieveCategories = listOf("전체", "성공", "실패")
-        setupSpinner(binding.spArchiveArchieve, archieveCategories, 70)
+        val archiveCategories = listOf("전체", "성공", "실패")
+        setupSpinner(binding.spArchiveArchieve, archiveCategories, 70)
 
         val typeCategories = listOf("전체", "반복", "단기", "장기")
         setupSpinner(binding.spArchiveType, typeCategories, 70)
@@ -37,6 +39,19 @@ class ArchiveActivity : AppCompatActivity() {
     private fun setupClickListeners() {
         binding.ivArchiveBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun setupRecyclerView() {
+        val archiveItems = listOf(
+            ArchiveItem("Goal 1", "자기소개서 제출 마감", "2024.01.26", 80),
+            ArchiveItem("Goal 2", "영어 단어 암기", "2024.01.20", 60),
+            ArchiveItem("Goal 3", "체력 훈련", "2024.01.15", 40)
+        )
+
+        binding.rvArchive.apply {
+            layoutManager = LinearLayoutManager(this@ArchiveActivity)
+            adapter = ArchiveAdapter(archiveItems)
         }
     }
 
