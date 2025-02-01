@@ -114,33 +114,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_add_goal_date" />
 
-            <EditText
-                android:id="@+id/et_add_goal_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="140dp"
-                android:inputType="number"
-                android:gravity="center"
-                android:fontFamily="@font/samliphopangche"
-                android:hint="1"
-                android:background="@android:color/transparent"
-                android:textColorHint="@color/blue1"
-                android:textColor="@color/blue1"
-                android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_add_goal_date" />
-
             <TextView
                 android:id="@+id/tv_add_goal_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="일"
+                android:text="1일"
                 android:fontFamily="@font/samliphopangche"
                 android:textColor="@color/blue1"
                 android:textSize="22sp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toEndOf="@id/et_add_goal_day"
+                android:layout_marginStart="140dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_add_goal_date" />
 
             <TextView
@@ -156,33 +140,17 @@
                 app:layout_constraintStart_toEndOf="@id/tv_add_goal_day"
                 app:layout_constraintTop_toBottomOf="@id/tv_add_goal_date" />
 
-            <EditText
-                android:id="@+id/et_add_goal_many"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="12dp"
-                android:inputType="number"
-                android:gravity="center"
-                android:fontFamily="@font/samliphopangche"
-                android:hint="3"
-                android:background="@android:color/transparent"
-                android:textColorHint="@color/blue1"
-                android:textColor="@color/blue1"
-                android:textSize="22sp"
-                app:layout_constraintStart_toEndOf="@id/tv_add_goal_each"
-                app:layout_constraintTop_toBottomOf="@id/tv_add_goal_date" />
-
             <TextView
                 android:id="@+id/tv_add_goal_many"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="회"
+                android:text="3회"
                 android:fontFamily="@font/samliphopangche"
                 android:textColor="@color/blue1"
                 android:textSize="22sp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toEndOf="@id/et_add_goal_many"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toEndOf="@id/tv_add_goal_each"
                 app:layout_constraintTop_toBottomOf="@id/tv_add_goal_date" />
 
             <TextView
@@ -262,9 +230,9 @@
                     android:src="@drawable/ic_add_goal_star"
                     android:layout_marginHorizontal="11dp" />
 
-        </LinearLayout>
+            </LinearLayout>
 
-    <TextView
+            <TextView
                 android:id="@+id/tv_add_goal_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -478,3 +446,4 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
