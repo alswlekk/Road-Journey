@@ -54,7 +54,7 @@ class AddGoalActivity : AppCompatActivity() {
 
         binding.tvAddGoalBtn.setOnClickListener {
             if (binding.tvAddGoalBtn.isEnabled) {
-                moveToFragment(HomeFragment())
+                showSaveDialog()
             }
         }
 
@@ -206,7 +206,6 @@ class AddGoalActivity : AppCompatActivity() {
             }
             binding.tvAddGoalLong.text = selectedText
             dialog.dismiss()
-            showSaveDialog()
         }
 
         dialogBinding.ivGoalTypeCancel.setOnClickListener {
@@ -225,6 +224,7 @@ class AddGoalActivity : AppCompatActivity() {
 
         saveDialogBinding.tvSaveBtn.setOnClickListener {
             saveDialog.dismiss()
+            moveToFragment(HomeFragment())
         }
 
         saveDialog.show()

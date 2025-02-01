@@ -1,31 +1,25 @@
 package com.roadjourney.Shop
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.roadjourney.R
+import com.roadjourney.databinding.ItemShopBinding
 
+class ShopAdapter(private var items: List<ShopItem>) : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
 
-class ShopAdapter(private val items: List<ShopItem>) : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
-    class ShopViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val ivShop: ImageView = view.findViewById(R.id.iv_shop)
-        private val tvShop: TextView = view.findViewById(R.id.tv_shop)
-        private val ivShopCoin: ImageView = view.findViewById(R.id.iv_shop_coin)
-        private val tvShopCoin: TextView = view.findViewById(R.id.tv_shop_coin)
+    class ShopViewHolder(private val binding: ItemShopBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ShopItem) {
-            ivShop.setImageResource(item.imageRes)
-            tvShop.text = item.name
-            tvShopCoin.text = item.price
+            binding.ivShop.setImageResource(item.imageRes)
+            binding.tvShop.text = item.name
+            binding.tvShopCoin.text = item.price
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_shop, parent, false)
-        return ShopViewHolder(view)
+        val binding = ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ShopViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ShopViewHolder, position: Int) {
@@ -33,4 +27,10 @@ class ShopAdapter(private val items: List<ShopItem>) : RecyclerView.Adapter<Shop
     }
 
     override fun getItemCount(): Int = items.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateItems(newItems: List<ShopItem>) {
+        items = newItems
+        notifyDataSetChanged()
+    }
 }
