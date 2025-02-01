@@ -32,7 +32,7 @@ class ShopFragment : Fragment() {
 
     private fun setupRecyclerView() {
         allItems = getDummyItems()
-        shopAdapter = ShopAdapter(allItems)
+        shopAdapter = ShopAdapter(allItems, requireContext())
         binding.rvShop.adapter = shopAdapter
     }
 
