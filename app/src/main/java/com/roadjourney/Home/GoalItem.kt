@@ -1,8 +1,8 @@
 package com.roadjourney.Home
 
 data class GoalItem(
-    val goal: String,
-    val detail: String,
+    val goalId: String,
+    val goalName: String,
     val dDay: String,
     val progressText: String,
     val progressValue: Int,

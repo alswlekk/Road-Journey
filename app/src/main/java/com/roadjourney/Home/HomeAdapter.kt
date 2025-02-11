@@ -10,8 +10,8 @@ class HomeAdapter(private var items: List<GoalItem>) : RecyclerView.Adapter<Home
 
     inner class HomeViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: GoalItem) {
-            binding.tvHomeGoal.text = item.goal
-            binding.tvHomeDetail.text = item.detail
+            binding.tvHomeGoal.text = item.goalId
+            binding.tvHomeDetail.text = item.goalName
             binding.tvHomeDday.text = item.dDay
             binding.tvHomeProgress.text = item.progressText
             binding.pbHome.progress = item.progressValue
