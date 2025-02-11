@@ -9,11 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roadjourney.Home.HomeFragment
 import com.roadjourney.R
 import com.roadjourney.databinding.ActivityAddGoalBinding
+import com.roadjourney.databinding.DialogCalendarBinding
 import com.roadjourney.databinding.DialogGoalTypeBinding
 import com.roadjourney.databinding.DialogSaveBinding
 
@@ -147,25 +149,24 @@ class AddGoalActivity : AppCompatActivity() {
         }
     }
 
-
     private fun updateLayoutConstraints(isRecyclerViewVisible: Boolean) {
-        val constraintSet = androidx.constraintlayout.widget.ConstraintSet()
+        val constraintSet = ConstraintSet()
         constraintSet.clone(binding.clAddGoal)
 
         if (isRecyclerViewVisible) {
             constraintSet.connect(
                 R.id.cl_add_goal_share,
-                androidx.constraintlayout.widget.ConstraintSet.TOP,
+                ConstraintSet.TOP,
                 R.id.iv_add_goal_minus,
-                androidx.constraintlayout.widget.ConstraintSet.BOTTOM,
+                ConstraintSet.BOTTOM,
                 60
             )
         } else {
             constraintSet.connect(
                 R.id.cl_add_goal_share,
-                androidx.constraintlayout.widget.ConstraintSet.TOP,
+                ConstraintSet.TOP,
                 R.id.tv_add_goal_normal,
-                androidx.constraintlayout.widget.ConstraintSet.BOTTOM,
+                ConstraintSet.BOTTOM,
                 20
             )
         }
@@ -188,13 +189,10 @@ class AddGoalActivity : AppCompatActivity() {
             .create()
 
         dialogBinding.rbRepeat.isChecked = true
+        updateGoalTypeVisibility(dialogBinding, R.id.rb_repeat)
 
         dialogBinding.rgGoalType.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.rb_repeat -> dialogBinding.tvAddGoalDate.text = "특정 일수마다 성공 여부에 관계없이\n자동으로 반복되는 목표입니다. 반복\n횟수와 간격을 지정할 수 있습니다.\n"
-                R.id.rb_short -> dialogBinding.tvAddGoalDate.text = "단기간에 달성할 수 있거나, 달성해야\n하는 목표입니다. 쉽고 간단한 목표라도\n꾸준히 해나간다면 당신의 성장에 도움\n이 될 것입니다."
-                R.id.rb_long -> dialogBinding.tvAddGoalDate.text = "달성하기 위해 오랫동안 노력을 기울여\n야 하는 목표입니다. 그만큼 성공했을\n때의 성취감이 더 크겠죠.\n"
-            }
+            updateGoalTypeVisibility(dialogBinding, checkedId)
         }
 
         dialogBinding.tvProfileEditBtn.setOnClickListener {
@@ -204,11 +202,109 @@ class AddGoalActivity : AppCompatActivity() {
                 R.id.rb_long -> dialogBinding.rbLong.text.toString()
                 else -> ""
             }
+
             binding.tvAddGoalLong.text = selectedText
+
+            when (dialogBinding.rgGoalType.checkedRadioButtonId) {
+                R.id.rb_repeat -> {
+                    val goalDay = dialogBinding.etAddGoalDay.text.toString().ifEmpty { "1" }
+                    val goalHow = dialogBinding.etAddGoalHow.text.toString().ifEmpty { "3" }
+
+                    binding.tvAddGoalDay.text = "${goalDay}일"
+                    binding.tvAddGoalEach.text = "마다"
+                    binding.tvAddGoalMany.text = "${goalHow}회"
+                    binding.tvAddGoalRepeat.text = "반복"
+                }
+                R.id.rb_short, R.id.rb_long -> {
+                    val startDate = dialogBinding.tvAddGoalDayShort.text.toString()
+                    val endDate = dialogBinding.tvAddGoalShort.text.toString()
+
+                    binding.tvAddGoalDay.text = "$startDate"
+                    binding.tvAddGoalEach.text = "~"
+                    binding.tvAddGoalMany.text = "$endDate"
+                    binding.tvAddGoalRepeat.text = ""
+                }
+            }
+
             dialog.dismiss()
         }
 
         dialogBinding.ivGoalTypeCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogBinding.tvAddGoalDayShort.setOnClickListener {
+            showCalendarDialog(dialogBinding.tvAddGoalDayShort, dialogBinding)
+        }
+
+        dialogBinding.tvAddGoalShort.setOnClickListener {
+            showCalendarDialog(dialogBinding.tvAddGoalShort, dialogBinding)
+        }
+
+        dialog.show()
+    }
+
+    private fun updateGoalTypeVisibility(dialogBinding: DialogGoalTypeBinding, selectedId: Int) {
+        if (selectedId == R.id.rb_repeat) {
+            dialogBinding.llGoalRepeat.visibility = View.VISIBLE
+            dialogBinding.llGoalHow.visibility = View.VISIBLE
+            dialogBinding.llGoalRepeatShort.visibility = View.GONE
+            dialogBinding.llGoalHowShort.visibility = View.GONE
+        } else {
+            dialogBinding.llGoalRepeat.visibility = View.GONE
+            dialogBinding.llGoalHow.visibility = View.GONE
+            dialogBinding.llGoalRepeatShort.visibility = View.VISIBLE
+            dialogBinding.llGoalHowShort.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showCalendarDialog(targetTextView: TextView, dialogBinding: DialogGoalTypeBinding) {
+        val calendarDialogBinding = DialogCalendarBinding.inflate(LayoutInflater.from(targetTextView.context))
+        val dialog = AlertDialog.Builder(targetTextView.context)
+            .setView(calendarDialogBinding.root)
+            .create()
+        val calendarView = calendarDialogBinding.calendarView
+        val dayDecorator = DayDecorator(targetTextView.context)
+        val sundayDecorator = SundayDecorator()
+        val saturdayDecorator = SaturdayDecorator()
+        calendarView.addDecorators(dayDecorator, sundayDecorator, saturdayDecorator)
+        calendarView.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
+        calendarView.setTitleFormatter { day ->
+            "${day.year}년 ${String.format("%02d", day.month + 1)}월"
+        }
+
+        var selectedDate: String? = null
+
+        calendarView.setOnDateChangedListener { _, date, _ ->
+            val formattedMonth = String.format("%02d", date.month)
+            val formattedDay = String.format("%02d", date.day)
+            selectedDate = "${date.year}.$formattedMonth.$formattedDay"
+        }
+
+        calendarDialogBinding.tvCalendarBtn.setOnClickListener {
+            selectedDate?.let { date ->
+                targetTextView.text = date
+
+                val startDateText = dialogBinding.tvAddGoalDayShort.text.toString()
+                val endDateText = dialogBinding.tvAddGoalShort.text.toString()
+
+                if (startDateText.isNotEmpty() && endDateText.isNotEmpty()) {
+                    val startDate = startDateText.replace(".", "").toInt()
+                    val endDate = endDateText.replace(".", "").toInt()
+
+                    if (targetTextView == dialogBinding.tvAddGoalShort && endDate < startDate) {
+                        dialogBinding.tvAddGoalShort.text = startDateText
+                    }
+
+                    if (targetTextView == dialogBinding.tvAddGoalDayShort && startDate > endDate) {
+                        dialogBinding.tvAddGoalDayShort.text = endDateText
+                    }
+                }
+            }
+            dialog.dismiss()
+        }
+
+        calendarDialogBinding.tvCalendarBtnCancel.setOnClickListener {
             dialog.dismiss()
         }
 
