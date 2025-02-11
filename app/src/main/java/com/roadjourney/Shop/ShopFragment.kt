@@ -1,5 +1,6 @@
 package com.roadjourney.Shop
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,11 @@ class ShopFragment : Fragment() {
         val typeCategories = listOf("전체", "배경", "장식품", "캐릭터")
         setupSpinner(binding.spShop, typeCategories, 110)
         setupRecyclerView()
+
+        binding.ivShopEvent.setOnClickListener {
+            val intent = Intent(requireContext(), ShopActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }

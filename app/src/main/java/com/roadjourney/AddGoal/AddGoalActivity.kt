@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.roadjourney.Home.HomeFragment
 import com.roadjourney.R
 import com.roadjourney.databinding.ActivityAddGoalBinding
+import com.roadjourney.databinding.DialogAddFriendBinding
 import com.roadjourney.databinding.DialogCalendarBinding
 import com.roadjourney.databinding.DialogGoalTypeBinding
+import com.roadjourney.databinding.DialogRequestBinding
 import com.roadjourney.databinding.DialogSaveBinding
 
 class AddGoalActivity : AppCompatActivity() {
@@ -31,10 +33,15 @@ class AddGoalActivity : AppCompatActivity() {
         binding = ActivityAddGoalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        selectedFriendAdapter = SelectedFriendAdapter(selectedFriends)
+        binding.rvAddGoalFriend.layoutManager = LinearLayoutManager(this)
+        binding.rvAddGoalFriend.adapter = selectedFriendAdapter
+
         setupClickListeners()
         setupTextWatchers()
         setupRecyclerView()
     }
+
 
     private fun setupClickListeners() {
         binding.ivAddGoalBack.setOnClickListener { finish() }
@@ -56,7 +63,11 @@ class AddGoalActivity : AppCompatActivity() {
 
         binding.tvAddGoalBtn.setOnClickListener {
             if (binding.tvAddGoalBtn.isEnabled) {
-                showSaveDialog()
+                if (!isGoalShare){
+                    showSaveDialog()
+                }else{
+                    showRequestDialog()
+                }
             }
         }
 
@@ -67,11 +78,29 @@ class AddGoalActivity : AppCompatActivity() {
         binding.ivAddGoalShareBtn.setOnClickListener {
             isGoalShare = !isGoalShare
             updateToggleImage(binding.ivAddGoalShareBtn, isGoalShare)
+            if (isGoalShare) {
+                binding.clAddGoalFriendType.visibility = View.VISIBLE
+                binding.rvAddGoalFriend.visibility = View.VISIBLE
+            }else{
+                binding.clAddGoalFriendType.visibility = View.GONE
+                binding.rvAddGoalFriend.visibility = View.GONE
+            }
+        }
+        binding.ivAddGoalFriendPlus.setOnClickListener {
+            showAddFriendDialog()
         }
 
         binding.ivAddGoalFriendBtn.setOnClickListener {
             isGoalFriend = !isGoalFriend
             updateToggleImage(binding.ivAddGoalFriendBtn, isGoalFriend)
+        }
+
+        binding.tvAddGoalFriendType.setOnClickListener {
+            if (binding.tvAddGoalFriendType.text == "협동") {
+                binding.tvAddGoalFriendType.text = "경쟁"
+            } else {
+                binding.tvAddGoalFriendType.text = "협동"
+            }
         }
 
     }
@@ -326,6 +355,21 @@ class AddGoalActivity : AppCompatActivity() {
         saveDialog.show()
     }
 
+    private fun showRequestDialog() {
+        val requestDialogBinding = DialogRequestBinding.inflate(LayoutInflater.from(this))
+        val requestDialog = AlertDialog.Builder(this)
+            .setView(requestDialogBinding.root)
+            .setCancelable(false)
+            .create()
+
+        requestDialogBinding.tvRequestBtn.setOnClickListener {
+            requestDialog.dismiss()
+            moveToFragment(HomeFragment())
+        }
+
+        requestDialog.show()
+    }
+
     private fun setupTextWatchers() {
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -379,4 +423,74 @@ class AddGoalActivity : AppCompatActivity() {
         }
         imageView.setImageResource(newImageRes)
     }
+
+    private val selectedFriends = mutableListOf<Friend>()
+    private lateinit var selectedFriendAdapter: SelectedFriendAdapter
+
+    private fun showAddFriendDialog() {
+        val dialogBinding = DialogAddFriendBinding.inflate(LayoutInflater.from(this))
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .create()
+
+        val allFriends = listOf(
+            Friend(R.drawable.img_friend_profile1, "김철수", "kim123"),
+            Friend(R.drawable.img_friend_profile1, "이영희", "lee1456"),
+            Friend(R.drawable.img_friend_profile1, "박민수", "park1789"),
+            Friend(R.drawable.img_friend_profile1, "정하늘", "skyblue1"),
+            Friend(R.drawable.img_friend_profile1, "한지민", "hanji199")
+        )
+
+        val tempSelectedFriends = mutableSetOf<Friend>()
+
+        val friendAdapter = FriendAdapter(allFriends) { friend, isAdded ->
+            if (isAdded) {
+                tempSelectedFriends.add(friend)
+                dialogBinding.tvAddFriendBtn.isEnabled = true
+                dialogBinding.tvAddFriendBtn.setBackgroundResource(R.drawable.shape_fill_blue1_25)
+            } else {
+                tempSelectedFriends.remove(friend)
+                dialogBinding.tvAddFriendBtn.isEnabled = false
+                dialogBinding.tvAddFriendBtn.setBackgroundResource(R.drawable.shape_fill_gray3_25)
+            }
+        }
+
+        dialogBinding.rvAddFriend.layoutManager = LinearLayoutManager(this)
+        dialogBinding.rvAddFriend.adapter = friendAdapter
+
+        dialogBinding.ivAddFriendCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogBinding.ivAddFriendSearch.setOnClickListener {
+            val query = dialogBinding.etAddFriend.text.toString().trim()
+            val filteredFriends = allFriends.filter {
+                it.name.contains(query, ignoreCase = true) || it.id.contains(query, ignoreCase = true)
+            }
+
+            if (filteredFriends.isEmpty()) {
+                dialogBinding.rvAddFriend.visibility = View.GONE
+                dialogBinding.tvAddFriendNo.visibility = View.VISIBLE
+            } else {
+                dialogBinding.rvAddFriend.visibility = View.VISIBLE
+                dialogBinding.tvAddFriendNo.visibility = View.GONE
+                friendAdapter.updateList(filteredFriends)
+            }
+        }
+
+        dialogBinding.tvAddFriendBtn.setOnClickListener {
+            selectedFriends.clear()
+            selectedFriends.addAll(tempSelectedFriends)
+            updateFriendRecyclerView()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun updateFriendRecyclerView() {
+        selectedFriendAdapter.updateList(selectedFriends.toList())
+        binding.rvAddGoalFriend.visibility = if (selectedFriends.isEmpty()) View.GONE else View.VISIBLE
+    }
+
 }
