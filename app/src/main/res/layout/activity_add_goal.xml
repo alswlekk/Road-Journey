@@ -75,7 +75,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="20dp"
                 android:gravity="center"
-                android:padding="16dp"
                 android:textSize="24sp"
                 android:fontFamily="@font/samliphopangche"
                 android:textColor="@color/blue2"
@@ -149,7 +148,7 @@
                 android:textColor="@color/blue1"
                 android:textSize="22sp"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="6dp"
                 app:layout_constraintStart_toEndOf="@id/tv_add_goal_each"
                 app:layout_constraintTop_toBottomOf="@id/tv_add_goal_date" />
 
@@ -390,13 +389,60 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_add_goal_friend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_add_goal_share"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_add_goal_friend_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_add_goal_friend">
+
+            <TextView
+                android:id="@+id/tv_add_goal_friend_type"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_fill_blue1_20"
+                android:text="협동"
+                android:fontFamily="@font/samliphopangche"
+                android:textColor="@color/blue1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginTop="18dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_add_goal_friend_plus"
+                android:src="@drawable/ic_plus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="22dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_add_goal_friend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_add_goal_share">
+                app:layout_constraintTop_toBottomOf="@id/cl_add_goal_friend_type">
 
                 <TextView
                     android:id="@+id/tv_add_goal_friend"

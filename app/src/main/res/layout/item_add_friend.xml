@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_add_friend">
+
+    <View
+        android:id="@+id/view_top_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_add_friend_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/img_friend_profile1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_add_friend_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:fontFamily="@font/samliphopangche"
+        android:text="그느드"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@id/iv_add_friend_profile"
+        app:layout_constraintTop_toTopOf="@id/iv_add_friend_profile" />
+
+    <TextView
+        android:id="@+id/tv_add_friend_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="1dp"
+        android:text="abc1234"
+        android:textColor="@color/gray4"
+        android:textSize="20sp"
+        android:fontFamily="@font/samliphopangche"
+        app:layout_constraintStart_toEndOf="@id/iv_add_friend_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_friend_name" />
+
+    <TextView
+        android:id="@+id/tv_add_friend_btn"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:background="@drawable/shape_fill_blue1_15"
+        android:fontFamily="@font/samliphopangche"
+        android:gravity="center"
+        android:text="추가하기"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
