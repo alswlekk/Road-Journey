@@ -10,9 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.roadjourney.Home.HomeFragment
 import com.roadjourney.R
 import com.roadjourney.databinding.ActivityAddGoalBinding
 import com.roadjourney.databinding.DialogAddFriendBinding
@@ -349,7 +347,7 @@ class AddGoalActivity : AppCompatActivity() {
 
         saveDialogBinding.tvSaveBtn.setOnClickListener {
             saveDialog.dismiss()
-            moveToFragment(HomeFragment())
+            finish()
         }
 
         saveDialog.show()
@@ -364,7 +362,7 @@ class AddGoalActivity : AppCompatActivity() {
 
         requestDialogBinding.tvRequestBtn.setOnClickListener {
             requestDialog.dismiss()
-            moveToFragment(HomeFragment())
+            finish()
         }
 
         requestDialog.show()
@@ -406,13 +404,6 @@ class AddGoalActivity : AppCompatActivity() {
             R.drawable.shape_fill_gray3_25
         }
         binding.tvAddGoalBtn.setBackgroundResource(backgroundRes)
-    }
-
-    private fun moveToFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main, fragment)
-            .addToBackStack(null)
-            .commit()
     }
 
     private fun updateToggleImage(imageView: ImageView, isEnabled: Boolean) {
