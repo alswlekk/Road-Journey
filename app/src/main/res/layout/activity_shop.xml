@@ -25,11 +25,11 @@
         android:text="특별 상점"
         android:fontFamily="@font/samliphopangche"
         android:textColor="@color/blue2"
-        android:textSize="32sp"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="10dp"
+        android:textSize="24sp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_shop_back"
         app:layout_constraintStart_toEndOf="@id/iv_shop_back"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/iv_shop_back" />
 
     <ImageView
         android:id="@+id/iv_shop_coin"
@@ -37,23 +37,23 @@
         android:layout_height="34dp"
         android:scaleType="fitXY"
         android:src="@drawable/img_coin"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="74dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/iv_shop_back"
+        app:layout_constraintTop_toTopOf="@id/iv_shop_back" />
 
     <TextView
         android:id="@+id/tv_shop_coin"
         android:layout_width="53dp"
         android:layout_height="24dp"
-        android:layout_marginTop="21dp"
         android:layout_marginEnd="14dp"
         android:text="1500"
         android:fontFamily="@font/samliphopangche"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/iv_shop_back"
+        app:layout_constraintTop_toTopOf="@id/iv_shop_back" />
 
     <TextView
         android:id="@+id/tv_shop_event"
@@ -62,7 +62,7 @@
         android:text="이벤트 기간"
         android:fontFamily="@font/samliphopangche"
         android:textColor="@color/blue6"
-        android:textSize="32sp"
+        android:textSize="25sp"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,11 +75,39 @@
         android:text="2025.02.05 ~ 2025.02.21"
         android:fontFamily="@font/samliphopangche"
         android:textColor="@color/blue1"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_shop_event" />
+
+    <TextView
+        android:id="@+id/tv_shop_btn"
+        android:layout_width="178dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginHorizontal="92dp"
+        android:background="@drawable/shape_fill_blue_12"
+        android:gravity="center"
+        android:text="아이템 목록 확인"
+        android:fontFamily="@font/samliphopangche"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_shop_event_day" />
+
+    <ImageView
+        android:id="@+id/iv_shop_ivent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_item_event"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_shop_btn" />
 
     <ImageView
         android:id="@+id/iv_shop_coin_won"
@@ -91,7 +119,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tv_shop_event_won"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_shop_event_day" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_shop_ivent" />
 
     <TextView
         android:id="@+id/tv_shop_event_won"
@@ -104,48 +132,21 @@
         android:layout_marginTop="42dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_shop_event_day" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_shop_ivent" />
 
     <TextView
         android:id="@+id/tv_shop_event_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="58dp"
         android:text="눌러서 아이템을 뽑아보세요"
         android:fontFamily="@font/samliphopangche"
         android:textColor="@color/gray5"
-        android:textSize="32sp"
+        android:textSize="20sp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_shop_event_won" />
-
-    <ImageView
-        android:id="@+id/iv_shop_ivent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/img_item_event"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_shop_event_detail" />
-
-    <TextView
-        android:id="@+id/tv_profile_edit_btn"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="34dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="23dp"
-        android:background="@drawable/shape_fill_blue_12"
-        android:gravity="center"
-        android:text="아이템 목록 확인"
-        android:fontFamily="@font/samliphopangche"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_shop_ivent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_shop_event_won"
         app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
