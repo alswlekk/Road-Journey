@@ -1,5 +1,6 @@
 package com.roadjourney.MyPage
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.roadjourney.Login.LoginActivity
 import com.roadjourney.R
+import com.roadjourney.databinding.DialogSuccessChangeBinding
 import com.roadjourney.databinding.FragmentChangeEmailBinding
 
 class ChangeEmailFragment : Fragment() {
@@ -44,9 +46,28 @@ class ChangeEmailFragment : Fragment() {
         }
         binding.etEmailChange.addTextChangedListener(textWatcher)
         binding.btnCompleteFilled.setOnClickListener {
-            // 이메일 변경 후 다이얼로그 떠야함
+            addChangeEmailDialog()
+        }
+
+        binding.ivChangeEmailBack.setOnClickListener {
+            // 클릭 시 MyPageFragment로 이동
+            requireActivity().finish()
+        }
+    }
+
+    private fun addChangeEmailDialog() {
+        val dialogSuccessChangeBinding  = DialogSuccessChangeBinding.inflate(LayoutInflater.from(requireContext()))
+
+        val successChangeDialog = AlertDialog
+            .Builder(requireContext())
+            .setView(dialogSuccessChangeBinding.root)
+            .create()
+
+        dialogSuccessChangeBinding.btnFinish.setOnClickListener {
+            successChangeDialog.dismiss()
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+        successChangeDialog.show()
     }
 }

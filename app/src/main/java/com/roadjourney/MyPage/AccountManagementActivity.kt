@@ -1,12 +1,8 @@
 package com.roadjourney.MyPage
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.roadjourney.R
 import com.roadjourney.databinding.ActivityAccountManagementBinding
 
@@ -30,7 +26,7 @@ class AccountManagementActivity : AppCompatActivity() {
         binding.tvAccountManageNameChange.setOnClickListener {
             binding.fcvChangeAccount.visibility = View.VISIBLE
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fcv_change_account, CheckPwFragment())
+                .replace(R.id.fcv_change_account, CheckPwNameFragment())
                 .commit()
         }
     }
@@ -39,7 +35,7 @@ class AccountManagementActivity : AppCompatActivity() {
         binding.tvAccountManageEmailChange.setOnClickListener {
             binding.fcvChangeAccount.visibility = View.VISIBLE
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fcv_change_account, CheckPwFragment())
+                .replace(R.id.fcv_change_account, CheckPwEmailFragment())
                 .commit()
     }
     }
@@ -48,7 +44,7 @@ class AccountManagementActivity : AppCompatActivity() {
         binding.tvAccountManageIdChange.setOnClickListener {
             binding.fcvChangeAccount.visibility = View.VISIBLE
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fcv_change_account, CheckPwFragment())
+                .replace(R.id.fcv_change_account, CheckPwIdFragment())
                 .commit()
         }
     }
@@ -57,7 +53,7 @@ class AccountManagementActivity : AppCompatActivity() {
         binding.tvAccountManagePwChange.setOnClickListener {
             binding.fcvChangeAccount.visibility = View.VISIBLE
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fcv_change_account, CheckPwFragment())
+                .replace(R.id.fcv_change_account, CheckPwPwFragment())
                 .commit()
         }
     }

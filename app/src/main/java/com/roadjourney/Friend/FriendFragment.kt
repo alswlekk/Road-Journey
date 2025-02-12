@@ -1,9 +1,11 @@
 package com.roadjourney.Friend
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
@@ -52,22 +54,35 @@ class FriendFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val typeCategories = listOf("최근 접속", "가나다 순", "달성 목표 수")
-        setupSpinner(binding.spSort, typeCategories)
+        setupSpinner(binding.spSort, typeCategories, 110)
 
+        clickEditFriend()
     }
 
-    private fun setupSpinner(spSort: Spinner, typeCategories: List<String>) {
+    private fun clickEditFriend() {
+        binding.ivEditFriend.setOnClickListener {
+            val intent = Intent(requireContext(), FriendManagementActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.ivEditFriendIcon.setOnClickListener {
+            val intent = Intent(requireContext(), FriendManagementActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun setupSpinner(spSort: Spinner, typeCategories: List<String>, left: Int) {
         val adapter = object : ArrayAdapter<String>(
             requireContext(),
             R.layout.spinner_item, typeCategories
         ) {
-
             override fun getView(position: Int, converView: View?, parent: ViewGroup): View {
                 val view = super.getView(position, converView, parent) as TextView
                 view.setBackgroundResource(R.drawable.spinner_background)
                 view.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                 view.setTextColor(resources.getColor(R.color.white, null))
                 view.textSize = 15f
+                view.setPadding(left, 0, 0, 0)
                 view.typeface = resources.getFont(R.font.samliphopangche)
                 return view
             }
@@ -92,8 +107,47 @@ class FriendFragment : Fragment() {
             }
 
         }
-
         spSort.adapter = adapter
-        spSort.setSelection(0)
+
+        spSort.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedCategory = typeCategories[position]
+                filterItems(selectedCategory)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+    }
+
+    private fun filterItems(selectedCategory: String) {
+        val filteredItems = when (selectedCategory) {
+            "최근 접속" -> getFriendData().sortedBy { parseTimeToHours(it.recentLogin) } // 한 번 다시 확인
+            "가나다 순" -> getFriendData().sortedBy { it.name }
+            // 달성 목표 많은 순으로
+            "달성 목표 수" -> getFriendData().sortedByDescending { it.goalsAchieved }
+            else -> getFriendData()
+        }
+        updateRecyclerViewData(filteredItems)
+    }
+
+    private fun parseTimeToHours(time: String): Int {
+        return when {
+            time.contains("시간 전") -> {
+                time.replace("시간 전", "").trim().toInt() // "1시간 전" → 1, "19시간 전" → 19
+            }
+            time.contains("주일 전") -> {
+                time.replace("주일 전", "").trim().toInt() * 24 * 7 // "2주일 전" → 336시간
+            }
+            time.contains("일 전") -> {
+                time.replace("일 전", "").trim().toInt() * 24 // "2일 전" → 48시간
+            }
+            else -> Int.MAX_VALUE // 예외 처리 (아주 오래된 경우 뒤쪽으로 배치)
+        }
     }
 }

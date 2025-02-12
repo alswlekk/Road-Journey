@@ -53,6 +53,23 @@
         android:text="상세 보기"
         android:textColor="@color/white"
         android:textSize="14sp"
+        android:id="@+id/tv_rc_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_rc_message" />
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/shape_fill_blue1_15"
+        android:fontFamily="@font/samliphopangche"
+        android:gravity="center"
+        android:text="방문하기"
+        android:id="@+id/tv_rc_visit"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_rc_message" />
 </androidx.constraintlayout.widget.ConstraintLayout>

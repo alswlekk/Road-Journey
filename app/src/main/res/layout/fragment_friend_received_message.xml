@@ -8,6 +8,7 @@
     tools:context=".Friend.FriendReceivedMessageFragment">
 
     <TextView
+        android:id="@+id/tv_friend_no_received_message"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

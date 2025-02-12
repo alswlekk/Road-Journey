@@ -25,7 +25,7 @@ class AchievementGoalAdapter(
             ItemAchievementBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         binding.ivAchievement.setOnClickListener() {
-            if (binding.ivAchievement.drawable.equals(R.drawable.img_acheivement_success)) {
+
                 val successDialogBinding =
                     DialogSuccessAchievementGoalBinding.inflate(LayoutInflater.from(parent.context))
                 val successDialog = AlertDialog.Builder(parent.context)
@@ -34,11 +34,10 @@ class AchievementGoalAdapter(
 
                 successDialogBinding.btnFinish.setOnClickListener {
                     successDialog.dismiss()
-                    binding.ivAchievement.setImageResource(R.drawable.img_achievement_complete)
-                    binding.ivAchievement.isClickable = false
+                    binding.ivAchievement.visibility = ViewGroup.GONE
+                    binding.ivAchievementComplete.visibility = ViewGroup.VISIBLE
                 }
                 successDialog.show()
-            }
         }
 
         return AchievementViewHolder(binding)

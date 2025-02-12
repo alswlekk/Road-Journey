@@ -1,5 +1,6 @@
 package com.roadjourney.Friend
 
+import FriendManagementSearchFragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +21,11 @@ class FriendManagementFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        childFragmentManager
+            .beginTransaction()
+            .replace(R.id.fcv_friend_management, FriendReceivedMessageFragment())
+            .commit()
 
         binding.tvMessageUnfilled.setOnClickListener {
             binding.tvMessageUnfilled.visibility = View.GONE
@@ -74,7 +80,7 @@ class FriendManagementFragment : Fragment() {
         }
 
         binding.ivFriendManagementBack.setOnClickListener {
-
+            activity?.finish()
         }
 
         super.onViewCreated(view, savedInstanceState)

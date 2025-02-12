@@ -2,11 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login.LoginActivity"
     android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:id="@+id/cl_main"
+        android:visibility="visible">
+
 
     <ImageView
         android:id="@+id/iv_login_logo"
@@ -146,6 +153,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <TextView
+        android:id="@+id/tv_find_id_pw"
         android:fontFamily="@font/samliphopangche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -156,5 +164,8 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_create_account" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@
         android:textColor="@color/gray4"
         android:textSize="28sp"
         android:fontFamily="@font/samliphopangche"
-
+        android:id="@+id/tv_friend_management_request_empty"
         />
 
     <androidx.recyclerview.widget.RecyclerView
