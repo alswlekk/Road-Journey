@@ -297,7 +297,7 @@ class AddGoalActivity : AppCompatActivity() {
         calendarView.addDecorators(dayDecorator, sundayDecorator, saturdayDecorator)
         calendarView.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
         calendarView.setTitleFormatter { day ->
-            "${day.year}년 ${String.format("%02d", day.month + 1)}월"
+            "${day.year}년 ${String.format("%02d", day.month)}월"
         }
 
         var selectedDate: String? = null
