@@ -40,9 +40,16 @@ class CheckPwIdFragment : Fragment() {
             }
         }
         binding.etPwCheck.addTextChangedListener(textWatcher)
+        binding.btnNextFilled.setOnClickListener {
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fcv_change_account, ChangeIdFragment())
+                .addToBackStack(null)
+                .commit()
+        }
 
         binding.ivCheckPwBack.setOnClickListener() {
-
+            requireActivity().finish()
         }
     }
 
