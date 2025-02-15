@@ -46,6 +46,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".MyPage.AlarmActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".AddGoal.AddGoalActivity"
             android:exported="false">
         </activity>
