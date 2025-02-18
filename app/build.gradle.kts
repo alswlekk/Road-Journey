@@ -49,9 +49,19 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.play.services.base)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
+    val retrofit_version = "2.6.1"
+// Retrofit 라이브러리
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+// Gson Converter 라이브러리
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
+// Scalars Converter 라이브러리
+    implementation("com.squareup.retrofit2:converter-scalars:$retrofit_version")
 }

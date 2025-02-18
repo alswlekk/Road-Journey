@@ -42,5 +42,9 @@ class MyPageFragment : Fragment() {
             val intent = Intent(requireContext(), AchievementActivity::class.java)
             startActivity(intent)
         }
+        binding.ivMyPageAlarm.setOnClickListener {
+            val intent = Intent(requireContext(), AlarmActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

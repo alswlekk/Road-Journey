@@ -36,9 +36,11 @@ class CreateAccount2Fragment : Fragment() {
                 if (isAllFilled) {
                     binding.btnNextFilled.visibility = View.VISIBLE
                     binding.btnNextUnfilled.visibility = View.GONE
+                    binding.tvNameError.visibility = View.GONE
                 } else {
                     binding.btnNextFilled.visibility = View.GONE
                     binding.btnNextUnfilled.visibility = View.VISIBLE
+                    binding.tvNameError.visibility = View.VISIBLE
                 }
             }
 
@@ -48,9 +50,16 @@ class CreateAccount2Fragment : Fragment() {
         binding.etCreateAccountName.addTextChangedListener(textWatcher)
 
         binding.btnNextFilled.setOnClickListener {
+
+            val nextFragment = CreateAccount3Fragment()
+            val bundle = Bundle()
+            bundle.putString("name", binding.etCreateAccountName.text.toString())
+
+            nextFragment.arguments = bundle
+
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fcv_create_account, CreateAccount3Fragment())
+                .replace(R.id.fcv_create_account, nextFragment)
                 .addToBackStack(null)
                 .commit()
         }
