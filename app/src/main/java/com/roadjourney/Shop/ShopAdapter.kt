@@ -9,21 +9,32 @@ import android.text.Spanned
 import android.text.style.ImageSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.roadjourney.R
+import com.roadjourney.SharedViewModel
 import com.roadjourney.databinding.DialogBuyBinding
+import com.roadjourney.databinding.DialogBuyFailBinding
 import com.roadjourney.databinding.DialogItemInfoBinding
 import com.roadjourney.databinding.ItemShopBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class ShopAdapter(private var items: List<ShopItem>, private val context: Context) :
-    RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
+class ShopAdapter(
+    private var items: List<ShopItem>,
+    private val context: Context,
+    private val sharedViewModel: SharedViewModel
+) : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
 
-    class ShopViewHolder(private val binding: ItemShopBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ShopViewHolder(private val binding: ItemShopBinding, private val sharedViewModel: SharedViewModel) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ShopItem, context: Context) {
             binding.ivShop.setImageResource(item.imageRes)
-            binding.tvShop.text = item.name
-            binding.tvShopCoin.text = item.price
+            binding.tvShop.text = item.itemName
+            binding.tvShopCoin.text = item.gold.toString()
 
             binding.root.setOnClickListener {
                 showItemDialog(item, context)
@@ -35,13 +46,16 @@ class ShopAdapter(private var items: List<ShopItem>, private val context: Contex
             val dialogBinding = DialogItemInfoBinding.inflate(LayoutInflater.from(context))
             dialog.setContentView(dialogBinding.root)
             dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
             dialogBinding.tvItem.text = item.category
             dialogBinding.ivShop.setImageResource(item.imageRes)
-            dialogBinding.tvItemName.text = item.name
+            dialogBinding.tvItemName.text = item.itemName
+            dialogBinding.tvItemDetail.text = item.description
+
             val coinDrawable: Drawable? = ContextCompat.getDrawable(context, R.drawable.img_coin)
             coinDrawable?.setBounds(0, 0, coinDrawable.intrinsicWidth, coinDrawable.intrinsicHeight)
 
-            val spannable = SpannableString("  ${item.price}")
+            val spannable = SpannableString("  ${item.gold}")
             coinDrawable?.let {
                 val imageSpan = ImageSpan(it, ImageSpan.ALIGN_BOTTOM)
                 spannable.setSpan(imageSpan, 0, 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
@@ -55,10 +69,55 @@ class ShopAdapter(private var items: List<ShopItem>, private val context: Contex
 
             dialogBinding.tvItemSaveBtn.setOnClickListener {
                 dialog.dismiss()
-                showBuyDialog(context, item)
+                purchaseItem(context, item)
             }
 
             dialog.show()
+        }
+
+        private fun purchaseItem(context: Context, item: ShopItem) {
+            val baseUrl = "http://52.78.84.107:8080"
+
+            sharedViewModel.accessToken.value?.let { token ->
+                if (token.isNotEmpty()) {
+                    val apiService = ShopApi.getInstance(baseUrl, token)
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                            val response = apiService.orderItem(item.itemId, "Bearer $token")
+                            withContext(Dispatchers.Main) {
+                                if (response.isSuccessful) {
+                                    val orderResponse = response.body()
+                                    orderResponse?.let {
+                                        if (it.status == "success") {
+                                            showBuyDialog(context, item)
+                                        } else {
+                                            showBuyFailDialog(context, item)
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (e: Exception) {
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(context, "네트워크 오류: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private fun showBuyFailDialog(context: Context, item: ShopItem) {
+            val buyFailDialog = Dialog(context)
+            val buyFailBinding = DialogBuyFailBinding.inflate(LayoutInflater.from(context))
+            buyFailDialog.setContentView(buyFailBinding.root)
+
+            buyFailBinding.tvSaveBtn.setOnClickListener {
+                buyFailDialog.dismiss()
+            }
+
+            buyFailDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            buyFailDialog.show()
         }
 
         private fun showBuyDialog(context: Context, item: ShopItem) {
@@ -77,7 +136,7 @@ class ShopAdapter(private var items: List<ShopItem>, private val context: Contex
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
         val binding = ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ShopViewHolder(binding)
+        return ShopViewHolder(binding, sharedViewModel) // ViewModel 전달
     }
 
     override fun onBindViewHolder(holder: ShopViewHolder, position: Int) {

@@ -1,23 +1,15 @@
 package com.roadjourney.Login
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.android.gms.common.api.Api
 import com.roadjourney.CreateAccount.CreateAccountActivity
 import com.roadjourney.Login.Model.LoginData
 import com.roadjourney.Login.Model.LoginResponseData
 import com.roadjourney.MainActivity
-import com.roadjourney.R
 import com.roadjourney.Retrofit.RetrofitObject
 import com.roadjourney.Retrofit.Service.LoginService
 import com.roadjourney.Retrofit.SharedPreferencesHelper
@@ -29,7 +21,6 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private var canLogin = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +35,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun clickFindAccountText() {
         binding.tvFindIdPw.setOnClickListener() {
-            // 아이디/비밀번호 찾기 클릭 시 dialog_find_id_pw.xml 띄우기
             addFindIdPwDialog()
         }
     }
@@ -81,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             if (binding.etLoginId.text.toString().trim().isEmpty() || binding.etLoginPw.text.toString().trim().isEmpty()) {
                     binding.tvNoInputError.visibility = View.VISIBLE
-                    return@setOnClickListener // 아이디와 비밀번호 중 하나라도 입력하지 않았을 경우 코드 더 이상 실행하지 않음
+                    return@setOnClickListener
             } else {
                 binding.tvNoInputError.visibility = View.INVISIBLE
             }
@@ -99,27 +89,21 @@ class LoginActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val tokenData = response.body()?.data
                         if (tokenData != null) {
-                            // TokenData를 SharedPreferences에 저장
                             SharedPreferencesHelper.saveTokenData(this@LoginActivity, tokenData)
-                        }
 
-                        // MainActivity로 이동
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//                        intent.putExtra("tokenData", tokenData)
-                        startActivity(intent)
-                        finish()
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
+                                putExtra("accessToken", tokenData.accessToken)
+                                putExtra("userId", tokenData.userId)
+                            }
+                            startActivity(intent)
+                            finish()
+                        }
                     } else {
-                        Log.e("server response fail", "Server response failed with code: ${response.code()}")
                         binding.tvLoginError.visibility = View.VISIBLE
                     }
                 }
 
                 override fun onFailure(call: Call<LoginResponseData>, t: Throwable) {
-                    if (t is java.net.UnknownHostException) {
-                        Log.e("NetworkError", "Unable to resolve host: ${t.message}")
-                    } else {
-                        Log.e("fetch failure", "Failed to fetch reservation items: ${t.message}")
-                    }
                     binding.tvLoginError.visibility = View.VISIBLE
                 }
 

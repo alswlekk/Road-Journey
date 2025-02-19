@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.roadjourney.SharedViewModel
 import com.roadjourney.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -26,22 +29,32 @@ class MyPageFragment : Fragment() {
             val intent = Intent(requireContext(), ProfileActivity::class.java)
             startActivity(intent)
         }
+
         binding.clMyPageItem.setOnClickListener {
             val intent = Intent(requireContext(), ItemActivity::class.java)
+
+            sharedViewModel.accessToken.value?.let { token ->
+                intent.putExtra("accessToken", token)
+            }
+
             startActivity(intent)
         }
+
         binding.clMyPageSetting.setOnClickListener {
             val intent = Intent(requireContext(), SettingActivity::class.java)
             startActivity(intent)
         }
+
         binding.clMyPageAccount.setOnClickListener {
             val intent = Intent(requireContext(), AccountManagementActivity::class.java)
             startActivity(intent)
         }
+
         binding.clMyPageChallenge.setOnClickListener {
             val intent = Intent(requireContext(), AchievementActivity::class.java)
             startActivity(intent)
         }
+
         binding.ivMyPageAlarm.setOnClickListener {
             val intent = Intent(requireContext(), AlarmActivity::class.java)
             startActivity(intent)

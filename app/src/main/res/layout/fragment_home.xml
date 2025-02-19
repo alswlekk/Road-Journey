@@ -121,7 +121,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rb_repeat"
+                        android:id="@+id/rb_repeated"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                         android:textSize="16sp" />
 
                     <RadioButton
-                        android:id="@+id/rb_short"
+                        android:id="@+id/rb_short_term"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                         android:textSize="16sp" />
 
                     <RadioButton
-                        android:id="@+id/rb_long"
+                        android:id="@+id/rb_long_term"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
