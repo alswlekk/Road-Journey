@@ -1,5 +1,6 @@
 package com.roadjourney.MyPage
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.roadjourney.Login.LoginActivity
 import com.roadjourney.R
+import com.roadjourney.databinding.DialogSuccessChangeBinding
 import com.roadjourney.databinding.FragmentChangePwBinding
 
 class ChangePwFragment : Fragment() {
@@ -53,5 +55,29 @@ class ChangePwFragment : Fragment() {
                 binding.llChangeAccountPwCheck.visibility = View.VISIBLE
             }
         }
+
+        binding.ivChangePwBack.setOnClickListener {
+            requireActivity().finish()
+        }
+
+        binding.btnCompleteFilled.setOnClickListener {
+            addChangePwDialog()
+        }
+    }
+
+    private fun addChangePwDialog() {
+        val dialogSuccessChangeBinding  = DialogSuccessChangeBinding.inflate(LayoutInflater.from(requireContext()))
+
+        val successChangeDialog = AlertDialog
+            .Builder(requireContext())
+            .setView(dialogSuccessChangeBinding.root)
+            .create()
+
+        dialogSuccessChangeBinding.btnFinish.setOnClickListener {
+            successChangeDialog.dismiss()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
+        successChangeDialog.show()
     }
 }

@@ -1,8 +1,11 @@
 package com.roadjourney.Friend
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.roadjourney.databinding.DialogFriendBinding
 import com.roadjourney.databinding.ItemFriendBinding
 
 class FriendAdapter(private var items: List<FriendData>) :
@@ -16,6 +19,33 @@ class FriendAdapter(private var items: List<FriendData>) :
             binding.ivFriendRcProfile.setImageResource(item.profileImage)
             binding.tvFriendRcQuote.text = item.introduction
             binding.tvFriendRcGoal.text = "달성 목표: ${item.goalsAchieved}개"
+
+            itemView.setOnClickListener {
+                showDialog(item)
+            }
+        }
+
+        private fun showDialog(item: FriendData) {
+            val friendDialogBinding = DialogFriendBinding.inflate(LayoutInflater.from(itemView.context))
+
+            friendDialogBinding.tvFriendPopupName.text = item.name
+            friendDialogBinding.tvFriendPopupQuote.text = item.introduction
+//            friendDialogBinding.tvFriendPopupId.text = item.id
+            val friendDialog = AlertDialog.Builder(itemView.context)
+                .setView(friendDialogBinding.root)
+                .create()
+
+            friendDialogBinding.ivFriendPopupClose.setOnClickListener {
+                friendDialog.dismiss()
+            }
+
+            friendDialogBinding.btnVisit.setOnClickListener {
+                val intent = Intent(itemView.context, FriendProfileActivity::class.java)
+                itemView.context.startActivity(intent)
+                friendDialog.dismiss()
+            }
+
+            friendDialog.show()
         }
     }
 
@@ -36,5 +66,6 @@ class FriendAdapter(private var items: List<FriendData>) :
         items = data
         notifyDataSetChanged()
     }
+
 
 }

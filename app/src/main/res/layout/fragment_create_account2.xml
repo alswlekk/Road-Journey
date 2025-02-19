@@ -7,72 +7,80 @@
     android:background="@color/white"
     tools:context=".CreateAccount.CreateAccount2Fragment">
 
-    <ImageView
-        android:id="@+id/iv_top_count1"
-        android:layout_width="104dp"
-        android:layout_height="10dp"
-        android:layout_marginStart="20dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="54dp"
-        android:src="@drawable/create_account_filled"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/cl_top_count"
+        >
+        <ImageView
+            android:id="@+id/iv_top_count1"
+            android:layout_width="104dp"
+            android:layout_height="10dp"
+            android:src="@drawable/create_account_filled"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_top_count2"
-        android:layout_width="104dp"
-        android:layout_height="10dp"
-        android:layout_marginStart="4dp"
-        android:src="@drawable/create_account_filled"
-        app:layout_constraintStart_toEndOf="@+id/iv_top_count1"
-        app:layout_constraintTop_toTopOf="@+id/iv_top_count1" />
+        <ImageView
+            android:id="@+id/iv_top_count2"
+            android:layout_width="104dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/create_account_unfilled"
+            app:layout_constraintStart_toEndOf="@+id/iv_top_count1"
+            app:layout_constraintTop_toTopOf="@+id/iv_top_count1" />
 
-    <ImageView
-        android:id="@+id/iv_top_count3"
-        android:layout_width="104dp"
-        android:layout_height="10dp"
-        android:layout_marginStart="4dp"
-        android:src="@drawable/create_account_unfilled"
-        app:layout_constraintStart_toEndOf="@+id/iv_top_count2"
-        app:layout_constraintTop_toTopOf="@+id/iv_top_count1" />
+        <ImageView
+            android:id="@+id/iv_top_count3"
+            android:layout_width="104dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/create_account_unfilled"
+            app:layout_constraintStart_toEndOf="@+id/iv_top_count2"
+            app:layout_constraintTop_toTopOf="@+id/iv_top_count1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:fontFamily="@font/samliphopangche"
         android:id="@+id/tv_request_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="62dp"
         android:text="당신의 이름은 무엇인가요?"
         android:textColor="@color/blue2"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/iv_top_count1" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cl_top_count" />
 
     <EditText
-
+        android:textColor="#003A9A"
         android:fontFamily="@font/samliphopangche"
         android:id="@+id/et_create_account_name"
         android:layout_width="310dp"
         android:layout_height="60dp"
-        android:layout_marginStart="25dp"
         android:layout_marginTop="70dp"
         android:background="@drawable/shape_login"
         android:gravity="center"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_request_name_text" />
 
     <TextView
+        android:id="@+id/tv_name_error"
         android:fontFamily="@font/samliphopangche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
         android:layout_marginTop="14dp"
         android:text="이름을 입력해주세요."
         android:textColor="@color/red1"
         android:textSize="16sp"
         android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/et_create_account_name"
         app:layout_constraintTop_toBottomOf="@id/et_create_account_name" />
 
     <Button

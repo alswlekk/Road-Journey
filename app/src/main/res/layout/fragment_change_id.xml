@@ -36,7 +36,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/samliphopangche"
-        android:text="변경할 이름을 입력해주세요."
+        android:text="변경할 아이디를 입력해주세요."
         android:textColor="@color/blue2"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@id/iv_change_id_back"
@@ -93,7 +93,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_id_error"
+        android:id="@+id/tv_id_already_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"

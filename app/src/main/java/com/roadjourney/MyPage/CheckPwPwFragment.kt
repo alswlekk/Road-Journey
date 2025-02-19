@@ -1,6 +1,5 @@
 package com.roadjourney.MyPage
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,16 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.roadjourney.R
-import com.roadjourney.databinding.FragmentCheckPwBinding
+import com.roadjourney.databinding.FragmentCheckPwPwBinding
 
-class CheckPwFragment : Fragment() {
-    lateinit var binding: FragmentCheckPwBinding
+class CheckPwPwFragment : Fragment() {
+    lateinit var binding: FragmentCheckPwPwBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCheckPwBinding.inflate(layoutInflater)
+        binding = FragmentCheckPwPwBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -26,7 +25,8 @@ class CheckPwFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val isAllFilled = binding.etPwCheck.text.isNotEmpty()
@@ -42,12 +42,15 @@ class CheckPwFragment : Fragment() {
         }
         binding.etPwCheck.addTextChangedListener(textWatcher)
         binding.btnNextFilled.setOnClickListener {
-            // 서버에서 account의 어떤 값 변경하려 한건지 받을 수 있는 지 확인 필요
             requireActivity().supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.fcv_change_account, ChangeEmailFragment()) // 임시로 이메일 창 뜨도록 해둠
+                .replace(R.id.fcv_change_account, ChangePwFragment())
                 .addToBackStack(null)
                 .commit()
+        }
+
+        binding.ivCheckPwBack.setOnClickListener {
+            requireActivity().finish()
         }
     }
 }

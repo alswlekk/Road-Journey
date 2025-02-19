@@ -1,5 +1,6 @@
 package com.roadjourney.MyPage
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.roadjourney.Login.LoginActivity
 import com.roadjourney.R
+import com.roadjourney.databinding.DialogSuccessChangeBinding
 import com.roadjourney.databinding.FragmentChangeIdBinding
 
 
@@ -46,9 +48,23 @@ class ChangeIdFragment : Fragment() {
         }
         binding.etIdChange.addTextChangedListener(textWatcher)
         binding.btnCompleteFilled.setOnClickListener {
-            // 변경 후 다이얼로그 떠야함ㄹㅇㅁ
+            addChangeIdDialog()
+        }
+    }
+
+    private fun addChangeIdDialog() {
+        val dialogSuccessChangeBinding  = DialogSuccessChangeBinding.inflate(LayoutInflater.from(requireContext()))
+
+        val successChangeDialog = AlertDialog
+            .Builder(requireContext())
+            .setView(dialogSuccessChangeBinding.root)
+            .create()
+
+        dialogSuccessChangeBinding.btnFinish.setOnClickListener {
+            successChangeDialog.dismiss()
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+        successChangeDialog.show()
     }
 }

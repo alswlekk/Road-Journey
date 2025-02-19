@@ -18,7 +18,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fcv_create_account, CreateAccount1Fragment())
+            .replace(R.id.fcv_create_account, CreateAccount2Fragment())
             .commit()
     }
 }

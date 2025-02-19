@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".Friend.FriendManagementSearchFragment">
+    tools:context=".Friend.FriendManagementActivity">
 
     <TextView
+        android:id="@+id/tv_friend_no_result"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,6 +39,15 @@
         android:layout_marginTop="9dp"
         android:layout_marginStart="29dp"
         />
+
+    <ImageView
+        android:id="@+id/iv_friend_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_friend_search"
+        android:layout_marginEnd="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/et_friend_management_search" />
 
     <ImageView
         android:id="@+id/iv_friend_line"
