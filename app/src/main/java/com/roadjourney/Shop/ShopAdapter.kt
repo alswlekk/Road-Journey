@@ -9,7 +9,6 @@ import android.text.Spanned
 import android.text.style.ImageSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.roadjourney.R
@@ -26,10 +25,11 @@ import kotlinx.coroutines.withContext
 class ShopAdapter(
     private var items: List<ShopItem>,
     private val context: Context,
-    private val sharedViewModel: SharedViewModel
+    private val sharedViewModel: SharedViewModel,
+    private val updateShopItems: () -> Unit
 ) : RecyclerView.Adapter<ShopAdapter.ShopViewHolder>() {
 
-    class ShopViewHolder(private val binding: ItemShopBinding, private val sharedViewModel: SharedViewModel) :
+    class ShopViewHolder(private val binding: ItemShopBinding, private val sharedViewModel: SharedViewModel, private val updateShopItems: () -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ShopItem, context: Context) {
             binding.ivShop.setImageResource(item.imageRes)
@@ -88,29 +88,30 @@ class ShopAdapter(
                             withContext(Dispatchers.Main) {
                                 if (response.isSuccessful) {
                                     val orderResponse = response.body()
+
                                     orderResponse?.let {
                                         if (it.status == "success") {
-                                            showBuyDialog(context, item)
+                                            showBuyDialog(context, item, orderResponse.availableGold)
                                         } else {
-                                            showBuyFailDialog(context, item)
+                                            showBuyFailDialog(context, item, orderResponse.message ?: "구매 실패")
                                         }
+                                        updateShopItems()
                                     }
                                 }
                             }
                         } catch (e: Exception) {
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(context, "네트워크 오류: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
                         }
                     }
                 }
             }
         }
 
-        private fun showBuyFailDialog(context: Context, item: ShopItem) {
+        private fun showBuyFailDialog(context: Context, item: ShopItem, reason: String) {
             val buyFailDialog = Dialog(context)
             val buyFailBinding = DialogBuyFailBinding.inflate(LayoutInflater.from(context))
             buyFailDialog.setContentView(buyFailBinding.root)
+
+            buyFailBinding.tvSuccess.text = reason
 
             buyFailBinding.tvSaveBtn.setOnClickListener {
                 buyFailDialog.dismiss()
@@ -120,7 +121,7 @@ class ShopAdapter(
             buyFailDialog.show()
         }
 
-        private fun showBuyDialog(context: Context, item: ShopItem) {
+        private fun showBuyDialog(context: Context, item: ShopItem, availableGold: Int) {
             val buyDialog = Dialog(context)
             val buyBinding = DialogBuyBinding.inflate(LayoutInflater.from(context))
             buyDialog.setContentView(buyBinding.root)
@@ -136,7 +137,7 @@ class ShopAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
         val binding = ItemShopBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ShopViewHolder(binding, sharedViewModel) // ViewModel 전달
+        return ShopViewHolder(binding, sharedViewModel, updateShopItems)
     }
 
     override fun onBindViewHolder(holder: ShopViewHolder, position: Int) {

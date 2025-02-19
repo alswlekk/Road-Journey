@@ -23,4 +23,9 @@ interface ShopApiService {
     suspend fun getSpecialShopItems(
         @Header("Authorization") authToken: String
     ): ShopEventApiResponse
+
+    @POST("items/special/order")
+    suspend fun orderSpecialItem(
+        @Header("Authorization") authToken: String
+    ): Response<SpecialOrderResponse>
 }

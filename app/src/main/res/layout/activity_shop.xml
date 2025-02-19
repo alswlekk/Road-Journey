@@ -124,7 +124,7 @@
         android:id="@+id/tv_shop_event_won"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-1000"
+        android:text="-30000"
         android:fontFamily="@font/samliphopangche"
         android:textColor="@color/blue2"
         android:textSize="32sp"

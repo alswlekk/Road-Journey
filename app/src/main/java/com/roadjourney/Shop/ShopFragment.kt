@@ -53,8 +53,21 @@ class ShopFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        shopAdapter = ShopAdapter(listOf(), requireContext(), sharedViewModel)
+        shopAdapter = ShopAdapter(
+            listOf(),
+            requireContext(),
+            sharedViewModel,
+            ::updateShopItems
+        )
         binding.rvShop.adapter = shopAdapter
+    }
+
+    private fun updateShopItems() {
+        sharedViewModel.accessToken.value?.let { token ->
+            if (token.isNotEmpty()) {
+                fetchShopItems("all", token)
+            }
+        }
     }
 
     private fun setupSpinner(spinner: Spinner, categories: List<String>) {

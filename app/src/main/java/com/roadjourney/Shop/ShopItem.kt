@@ -26,5 +26,14 @@ data class ShopItem(
 data class OrderResponse(
     val purchasedItemId: Int,
     val availableGold: Int,
-    val status: String
+    val status: String,
+    val message: String? = null
+)
+
+data class SpecialOrderResponse(
+    val message: String,
+    val status: String,
+    val availableGold: Int,
+    val itemName: String,
+    val description: String
 )
