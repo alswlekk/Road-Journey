@@ -131,22 +131,15 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
                                                         if (body.result != null) {
                                                             dialog.dismiss()
                                                             showGoalSuccessDialog(context, body.result.gold, body.result.growthPoint)
-                                                        } else {
-                                                            dialogBinding.tvGoalDetailBtnSuccess.text = "목표 완료! 참가자 대기 중"
                                                         }
 
                                                         dialogBinding.tvGoalDetailBtnSuccess.isEnabled = false
                                                         dialogBinding.tvGoalDetailBtnSuccess.setBackgroundResource(
                                                             R.drawable.shape_fill_gray3_25)
                                                     }
-                                                } else {
-                                                    dialogBinding.tvGoalDetailBtnSuccess.text = "목표 완료 실패"
                                                 }
                                             }
                                         } catch (e: Exception) {
-                                            withContext(Dispatchers.Main) {
-                                                dialogBinding.tvGoalDetailBtnSuccess.text = "에러 발생"
-                                            }
                                         }
                                     }
                                 }
