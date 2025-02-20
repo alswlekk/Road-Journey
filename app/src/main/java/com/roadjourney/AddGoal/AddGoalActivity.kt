@@ -40,7 +40,6 @@ class AddGoalActivity : AppCompatActivity() {
         setupRecyclerView()
     }
 
-
     private fun setupClickListeners() {
         binding.ivAddGoalBack.setOnClickListener { finish() }
 
@@ -215,8 +214,8 @@ class AddGoalActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .create()
 
-        dialogBinding.rbRepeat.isChecked = true
-        updateGoalTypeVisibility(dialogBinding, R.id.rb_repeat)
+        dialogBinding.rbRepeated.isChecked = true
+        updateGoalTypeVisibility(dialogBinding, R.id.rb_repeated)
 
         dialogBinding.rgGoalType.setOnCheckedChangeListener { _, checkedId ->
             updateGoalTypeVisibility(dialogBinding, checkedId)
@@ -224,16 +223,16 @@ class AddGoalActivity : AppCompatActivity() {
 
         dialogBinding.tvProfileEditBtn.setOnClickListener {
             val selectedText = when (dialogBinding.rgGoalType.checkedRadioButtonId) {
-                R.id.rb_repeat -> dialogBinding.rbRepeat.text.toString()
-                R.id.rb_short -> dialogBinding.rbShort.text.toString()
-                R.id.rb_long -> dialogBinding.rbLong.text.toString()
+                R.id.rb_repeated -> dialogBinding.rbRepeated.text.toString()
+                R.id.rb_short_term -> dialogBinding.rbShortTerm.text.toString()
+                R.id.rb_long_term -> dialogBinding.rbLongTerm.text.toString()
                 else -> ""
             }
 
             binding.tvAddGoalLong.text = selectedText
 
             when (dialogBinding.rgGoalType.checkedRadioButtonId) {
-                R.id.rb_repeat -> {
+                R.id.rb_repeated -> {
                     val goalDay = dialogBinding.etAddGoalDay.text.toString().ifEmpty { "1" }
                     val goalHow = dialogBinding.etAddGoalHow.text.toString().ifEmpty { "3" }
 
@@ -242,7 +241,7 @@ class AddGoalActivity : AppCompatActivity() {
                     binding.tvAddGoalMany.text = "${goalHow}회"
                     binding.tvAddGoalRepeat.text = "반복"
                 }
-                R.id.rb_short, R.id.rb_long -> {
+                R.id.rb_short_term, R.id.rb_long_term -> {
                     val startDate = dialogBinding.tvAddGoalDayShort.text.toString()
                     val endDate = dialogBinding.tvAddGoalShort.text.toString()
 
@@ -272,7 +271,7 @@ class AddGoalActivity : AppCompatActivity() {
     }
 
     private fun updateGoalTypeVisibility(dialogBinding: DialogGoalTypeBinding, selectedId: Int) {
-        if (selectedId == R.id.rb_repeat) {
+        if (selectedId == R.id.rb_repeated) {
             dialogBinding.llGoalRepeat.visibility = View.VISIBLE
             dialogBinding.llGoalHow.visibility = View.VISIBLE
             dialogBinding.llGoalRepeatShort.visibility = View.GONE

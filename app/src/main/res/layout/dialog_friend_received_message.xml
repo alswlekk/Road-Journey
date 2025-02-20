@@ -55,15 +55,15 @@
         android:layout_marginEnd="19dp"
         android:layout_marginTop="31dp"
         />
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_friend_received_message_period"
-            app:layout_constraintStart_toStartOf="@id/tv_friend_received_message_period"
-            android:layout_marginTop="26dp"
-            android:src="@drawable/ic_home_star"
-            android:id="@+id/iv_friend_received_message_star1"
-            />
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_friend_received_message_period"
+        app:layout_constraintStart_toStartOf="@id/tv_friend_received_message_period"
+        android:layout_marginTop="26dp"
+        android:src="@drawable/ic_home_star"
+        android:id="@+id/iv_friend_received_message_star1"
+        />
 
     <ImageView
         android:layout_width="25dp"
@@ -112,7 +112,7 @@
         android:layout_height="30dp"
         android:text="경쟁"
         android:textSize="14sp"
-        android:background="@drawable/shape_fill_blue_20"
+        android:background="@drawable/shape_fill_white_blue_20"
         android:gravity="center"
         android:textColor="@color/blue1"
         android:fontFamily="@font/samliphopangche"
@@ -140,7 +140,7 @@
         app:layout_constraintStart_toStartOf="@id/iv_friend_received_message_star1"
         android:paddingBottom="19dp"
         />
-    
+
     <TextView
         android:id="@+id/tv_friend_received_message_step1"
         android:layout_width="wrap_content"
@@ -203,7 +203,7 @@
         android:id="@+id/iv_friend_received_message_step1_star5"
         android:visibility="gone"
         />
-    
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -338,6 +338,6 @@
         android:textSize="20sp"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
