@@ -1,12 +1,12 @@
+package com.roadjourney.Friend
+
+import FriendSearchAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.roadjourney.AddGoal.Friend
 import com.roadjourney.R
 import com.roadjourney.databinding.FragmentFriendManagementSearchBinding
 

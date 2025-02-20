@@ -3,6 +3,7 @@ package com.roadjourney.AddGoal
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -18,10 +19,14 @@ import com.roadjourney.databinding.DialogCalendarBinding
 import com.roadjourney.databinding.DialogGoalTypeBinding
 import com.roadjourney.databinding.DialogRequestBinding
 import com.roadjourney.databinding.DialogSaveBinding
+import retrofit2.Call
+import retrofit2.Response
 
 class AddGoalActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddGoalBinding
+    private var accessToken: String = ""
+    private var userId: Int = -1
     private val starStates = BooleanArray(5)
     private var isGoalShare = false
     private var isGoalFriend = false
@@ -30,7 +35,8 @@ class AddGoalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddGoalBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        accessToken = intent.getStringExtra("accessToken") ?: ""
+        userId = intent.getIntExtra("userId", -1)
         selectedFriendAdapter = SelectedFriendAdapter(selectedFriends)
         binding.rvAddGoalFriend.layoutManager = LinearLayoutManager(this)
         binding.rvAddGoalFriend.adapter = selectedFriendAdapter
@@ -423,59 +429,65 @@ class AddGoalActivity : AppCompatActivity() {
             .setView(dialogBinding.root)
             .create()
 
-        val allFriends = listOf(
-            Friend(R.drawable.img_friend_profile1, "김철수", "kim123"),
-            Friend(R.drawable.img_friend_profile1, "이영희", "lee1456"),
-            Friend(R.drawable.img_friend_profile1, "박민수", "park1789"),
-            Friend(R.drawable.img_friend_profile1, "정하늘", "skyblue1"),
-            Friend(R.drawable.img_friend_profile1, "한지민", "hanji199")
-        )
-
-        val tempSelectedFriends = mutableSetOf<Friend>()
-
-        val friendAdapter = FriendAdapter(allFriends) { friend, isAdded ->
+        val friendAdapter = FriendAdapter(emptyList()) { friend, isAdded ->
             if (isAdded) {
-                tempSelectedFriends.add(friend)
-                dialogBinding.tvAddFriendBtn.isEnabled = true
-                dialogBinding.tvAddFriendBtn.setBackgroundResource(R.drawable.shape_fill_blue1_25)
+                selectedFriends.add(friend)
             } else {
-                tempSelectedFriends.remove(friend)
-                dialogBinding.tvAddFriendBtn.isEnabled = false
-                dialogBinding.tvAddFriendBtn.setBackgroundResource(R.drawable.shape_fill_gray3_25)
+                selectedFriends.remove(friend)
             }
+            dialogBinding.tvAddFriendBtn.isEnabled = selectedFriends.isNotEmpty()
+            dialogBinding.tvAddFriendBtn.setBackgroundResource(
+                if (selectedFriends.isNotEmpty()) R.drawable.shape_fill_blue1_25 else R.drawable.shape_fill_gray3_25
+            )
         }
 
         dialogBinding.rvAddFriend.layoutManager = LinearLayoutManager(this)
         dialogBinding.rvAddFriend.adapter = friendAdapter
 
+        dialogBinding.ivAddFriendSearch.setOnClickListener {
+            val query = dialogBinding.etAddFriend.text.toString().trim()
+            if (query.isNotEmpty()) {
+                searchFriendsFromServer(query, friendAdapter, dialogBinding)
+            }
+        }
+
         dialogBinding.ivAddFriendCancel.setOnClickListener {
             dialog.dismiss()
         }
 
-        dialogBinding.ivAddFriendSearch.setOnClickListener {
-            val query = dialogBinding.etAddFriend.text.toString().trim()
-            val filteredFriends = allFriends.filter {
-                it.name.contains(query, ignoreCase = true) || it.id.contains(query, ignoreCase = true)
-            }
-
-            if (filteredFriends.isEmpty()) {
-                dialogBinding.rvAddFriend.visibility = View.GONE
-                dialogBinding.tvAddFriendNo.visibility = View.VISIBLE
-            } else {
-                dialogBinding.rvAddFriend.visibility = View.VISIBLE
-                dialogBinding.tvAddFriendNo.visibility = View.GONE
-                friendAdapter.updateList(filteredFriends)
-            }
-        }
-
         dialogBinding.tvAddFriendBtn.setOnClickListener {
-            selectedFriends.clear()
-            selectedFriends.addAll(tempSelectedFriends)
             updateFriendRecyclerView()
             dialog.dismiss()
         }
 
         dialog.show()
+    }
+
+
+    private fun searchFriendsFromServer(query: String, adapter: FriendAdapter, dialogBinding: DialogAddFriendBinding) {
+        val token = "Bearer $accessToken"
+
+        RetrofitClient.instance.searchFriends(token, query).enqueue(object : retrofit2.Callback<FriendResponse> {
+            override fun onResponse(call: Call<FriendResponse>, response: Response<FriendResponse>) {
+                if (response.isSuccessful) {
+                    val friends = response.body()?.users ?: emptyList()
+                    friends.forEach { friend ->
+                        Log.d("사진 확인", "User: ${friend.nickname}, Image: ${friend.profileImage}")
+                    }
+                    if (friends.isEmpty()) {
+                        dialogBinding.rvAddFriend.visibility = View.GONE
+                        dialogBinding.tvAddFriendNo.visibility = View.VISIBLE
+                    } else {
+                        dialogBinding.rvAddFriend.visibility = View.VISIBLE
+                        dialogBinding.tvAddFriendNo.visibility = View.GONE
+                        adapter.updateList(friends)
+                    }
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<FriendResponse>, t: Throwable) {
+            }
+        })
     }
 
     private fun updateFriendRecyclerView() {

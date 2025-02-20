@@ -49,7 +49,10 @@ class HomeFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.ivHomeAdd.setOnClickListener {
-            val intent = Intent(requireContext(), AddGoalActivity::class.java)
+            val intent = Intent(requireContext(), AddGoalActivity::class.java).apply {
+                putExtra("accessToken", sharedViewModel.accessToken.value ?: "")
+                putExtra("userId", sharedViewModel.userId.value ?: -1)
+            }
             startActivity(intent)
         }
 

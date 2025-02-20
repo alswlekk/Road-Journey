@@ -19,8 +19,8 @@ class SelectedFriendAdapter(private val selectedFriends: MutableList<Friend>) :
     override fun onBindViewHolder(holder: SelectedFriendViewHolder, position: Int) {
         val friend = selectedFriends[position]
         with(holder.binding) {
-            tvAddFriendSuccessName.text = friend.name
-            tvAddFriendSuccessId.text = friend.id
+            tvAddFriendSuccessName.text = friend.nickname
+            tvAddFriendSuccessId.text = friend.accountId
         }
     }
 
