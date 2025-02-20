@@ -56,3 +56,16 @@ data class SubGoal(
     val description: String,
     val progressStatus: String
 )
+
+data class CompleteSubGoalResponse(
+    val code: Int,
+    val status: Int,
+    val message: String,
+    val result: RewardResult
+)
+
+data class RewardResult(
+    val gold: Int,
+    val growthPoint: Int,
+    val reward: Boolean
+)

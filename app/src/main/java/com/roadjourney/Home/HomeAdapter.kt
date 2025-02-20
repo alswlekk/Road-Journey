@@ -11,7 +11,10 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.roadjourney.R
 import com.roadjourney.databinding.DialogGoalDetailBinding
+import com.roadjourney.databinding.DialogGoalFailBinding
+import com.roadjourney.databinding.DialogGoalSuccessBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -92,8 +95,62 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
                                 setStarsVisibility(dialogBinding, goal.difficulty)
 
                                 dialogBinding.rvGoalDetailGoal.layoutManager = LinearLayoutManager(context)
-                                val subGoalAdapter = GoalDetailAdapter(subGoals, goal.subGoalType)
+                                val subGoalAdapter = GoalDetailAdapter(subGoals, goal.subGoalType, goalId, token)
                                 dialogBinding.rvGoalDetailGoal.adapter = subGoalAdapter
+
+                                dialogBinding.tvGoalDetailBtnFail.setOnClickListener {
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        try {
+                                            val response = apiService.failGoal(goal.goalId.toLong(), "Bearer $token")
+                                            withContext(Dispatchers.Main) {
+                                                if (response.isSuccessful) {
+                                                    val body = response.body()
+                                                    if (body != null && body.status == 200) {
+                                                        if (body.result != null) {
+                                                            dialog.dismiss()
+                                                            showGoalFailDialog(context, body.result.gold, body.result.growthPoint)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } catch (e: Exception) {
+                                        }
+                                    }
+                                }
+
+                                dialogBinding.tvGoalDetailBtnSuccess.setOnClickListener {
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        try {
+                                            val response = apiService.completeGoal(goal.goalId.toLong(), "Bearer $token")
+
+                                            withContext(Dispatchers.Main) {
+                                                if (response.isSuccessful) {
+                                                    val body = response.body()
+
+                                                    if (body != null && body.status == 200) {
+                                                        if (body.result != null) {
+                                                            dialog.dismiss()
+                                                            showGoalSuccessDialog(context, body.result.gold, body.result.growthPoint)
+                                                        } else {
+                                                            dialogBinding.tvGoalDetailBtnSuccess.text = "목표 완료! 참가자 대기 중"
+                                                        }
+
+                                                        dialogBinding.tvGoalDetailBtnSuccess.isEnabled = false
+                                                        dialogBinding.tvGoalDetailBtnSuccess.setBackgroundResource(
+                                                            R.drawable.shape_fill_gray3_25)
+                                                    }
+                                                } else {
+                                                    dialogBinding.tvGoalDetailBtnSuccess.text = "목표 완료 실패"
+                                                }
+                                            }
+                                        } catch (e: Exception) {
+                                            withContext(Dispatchers.Main) {
+                                                dialogBinding.tvGoalDetailBtnSuccess.text = "에러 발생"
+                                            }
+                                        }
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -101,6 +158,38 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
             } catch (e: Exception) {
             }
         }
+    }
+
+    private fun showGoalFailDialog(context: Context, gold: Int, growthPoint: Int) {
+        val dialog = Dialog(context)
+        val dialogBinding = DialogGoalFailBinding.inflate(LayoutInflater.from(context))
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        dialogBinding.tvGoalCoin.text = "골드 $gold"
+        dialogBinding.tvGoalGrow.text = "캐릭터 성장도 $growthPoint"
+
+        dialogBinding.tvSaveBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun showGoalSuccessDialog(context: Context, gold: Int, growthPoint: Int) {
+        val dialog = Dialog(context)
+        val dialogBinding = DialogGoalSuccessBinding.inflate(LayoutInflater.from(context))
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        dialogBinding.tvGoalCoin.text = "골드 +$gold"
+        dialogBinding.tvGoalGrow.text = "캐릭터 성장도 +$growthPoint"
+
+        dialogBinding.tvSaveBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun setStarsVisibility(binding: DialogGoalDetailBinding, difficulty: Int) {
