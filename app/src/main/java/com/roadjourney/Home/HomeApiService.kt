@@ -39,4 +39,10 @@ interface HomeApiService {
         @Path("goalId") goalId: Long,
         @Header("Authorization") authToken: String
     ): Response<CompleteSubGoalResponse>
+
+    @GET("main/{userId}")
+    suspend fun getMainInfo(
+        @Path("userId") userId: Long,
+        @Header("Authorization") authToken: String
+    ): Response<MainApiResponse>
 }

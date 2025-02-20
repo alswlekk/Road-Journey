@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="11dp"
-    android:background="@drawable/home_item_background">
+    android:background="@drawable/home_item_background_blue">
 
     <TextView
         android:id="@+id/tv_home_goal"

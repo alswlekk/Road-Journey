@@ -30,6 +30,7 @@ class GoalDetailAdapter(
             } else {
                 "Sub Goal ${position + 1}"
             }
+
             binding.tvGoal.text = goalText
             binding.tvGoalDetail.text = subGoal.description
 

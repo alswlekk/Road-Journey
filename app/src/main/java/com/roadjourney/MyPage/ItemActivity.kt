@@ -30,7 +30,6 @@ class ItemActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupSpinner()
-        setupRecyclerView()
         setupClickListeners()
 
         val receivedToken = intent.getStringExtra("accessToken") ?: ""
@@ -39,10 +38,19 @@ class ItemActivity : AppCompatActivity() {
         }
 
         sharedViewModel.accessToken.observe(this) { token ->
+
             if (!token.isNullOrEmpty()) {
+                storageItemAdapter = StorageItemAdapter(listOf(), this, token)
+                binding.rvItem.apply {
+                    layoutManager = GridLayoutManager(this@ItemActivity, 3)
+                    adapter = storageItemAdapter
+                }
+
                 fetchItems("all", token)
+            } else {
             }
         }
+
     }
 
     private fun setupSpinner() {
@@ -97,21 +105,13 @@ class ItemActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclerView() {
-        storageItemAdapter = StorageItemAdapter(listOf())
-        binding.rvItem.apply {
-            layoutManager = GridLayoutManager(this@ItemActivity, 3)
-            adapter = storageItemAdapter
-        }
-    }
-
     private fun setupClickListeners() {
         binding.ivItemBack.setOnClickListener {
             finish()
         }
     }
 
-    private fun fetchItems(category: String, token: String) {
+    fun fetchItems(category: String, token: String) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = ItemApi.getInstance(baseUrl, token).getStorageItems(category,"Bearer $token")

@@ -20,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeAdapter(private var items: List<GoalItem>, private val context: Context, private val token: String) :
+class HomeAdapter(private var items: List<GoalItem>, private val context: Context, private val token: String, private val homeFragment: HomeFragment ) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     inner class HomeViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -36,6 +36,13 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
             binding.ivHomeStar3.visibility = if (item.difficulty >= 3) View.VISIBLE else View.GONE
             binding.ivHomeStar4.visibility = if (item.difficulty >= 4) View.VISIBLE else View.GONE
             binding.ivHomeStar5.visibility = if (item.difficulty >= 5) View.VISIBLE else View.GONE
+
+            when (item.color) {
+                "white" -> binding.root.setBackgroundResource(R.drawable.home_item_background_white)
+                "blue" -> binding.root.setBackgroundResource(R.drawable.home_item_background_blue)
+                "red" -> binding.root.setBackgroundResource(R.drawable.home_item_background_red)
+                else -> binding.root.setBackgroundResource(R.drawable.home_item_background_blue)
+            }
 
             binding.root.setOnClickListener {
                 showGoalDetailDialog(context, item.goalId, token)
@@ -93,7 +100,9 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
                                 dialogBinding.pbGoalDetail.progress = goal.progress
 
                                 setStarsVisibility(dialogBinding, goal.difficulty)
-
+                                if(goal.subGoalType == "normal"){
+                                    dialogBinding.tvGoalDetailBtnSuccess.setBackgroundResource(R.drawable.shape_fill_activate_25)
+                                }
                                 dialogBinding.rvGoalDetailGoal.layoutManager = LinearLayoutManager(context)
                                 val subGoalAdapter = GoalDetailAdapter(subGoals, goal.subGoalType, goalId, token)
                                 dialogBinding.rvGoalDetailGoal.adapter = subGoalAdapter
@@ -136,6 +145,10 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
                                                         dialogBinding.tvGoalDetailBtnSuccess.isEnabled = false
                                                         dialogBinding.tvGoalDetailBtnSuccess.setBackgroundResource(
                                                             R.drawable.shape_fill_gray3_25)
+
+                                                        dialog.dismiss()
+                                                        homeFragment.fetchMainInfo(token, homeFragment.sharedViewModel.userId.value!!.toLong())
+                                                        homeFragment.fetchGoals("repeated", token, homeFragment.sharedViewModel.userId.value!!)
                                                     }
                                                 }
                                             }
@@ -164,6 +177,8 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
 
         dialogBinding.tvSaveBtn.setOnClickListener {
             dialog.dismiss()
+            homeFragment.fetchMainInfo(token, homeFragment.sharedViewModel.userId.value!!.toLong())
+            homeFragment.fetchGoals("repeated", token, homeFragment.sharedViewModel.userId.value!!)
         }
 
         dialog.show()
@@ -180,10 +195,14 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
 
         dialogBinding.tvSaveBtn.setOnClickListener {
             dialog.dismiss()
+            homeFragment.fetchMainInfo(token, homeFragment.sharedViewModel.userId.value!!.toLong())
+            homeFragment.fetchGoals("repeated", token, homeFragment.sharedViewModel.userId.value!!)
         }
 
         dialog.show()
     }
+
+
 
     private fun setStarsVisibility(binding: DialogGoalDetailBinding, difficulty: Int) {
         binding.ivGoalDetailStar1.visibility = if (difficulty >= 1) View.VISIBLE else View.GONE

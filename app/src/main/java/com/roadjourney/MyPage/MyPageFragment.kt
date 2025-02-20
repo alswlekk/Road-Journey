@@ -32,11 +32,9 @@ class MyPageFragment : Fragment() {
 
         binding.clMyPageItem.setOnClickListener {
             val intent = Intent(requireContext(), ItemActivity::class.java)
-
             sharedViewModel.accessToken.value?.let { token ->
                 intent.putExtra("accessToken", token)
             }
-
             startActivity(intent)
         }
 
