@@ -91,13 +91,13 @@
                 app:layout_constraintStart_toStartOf="@id/iv_home_cicle"/>
 
             <ImageView
-                android:id="@+id/iv_home_dog"
+                android:id="@+id/ic_home_dog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_home_dog"
-                android:layout_marginTop="202dp"
-                android:layout_marginStart="98dp"
+                android:layout_marginTop="140dp"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <LinearLayout
