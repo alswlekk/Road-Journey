@@ -10,8 +10,8 @@ class GoalAdapter(
     private val goals: MutableList<String>
 ) : RecyclerView.Adapter<GoalAdapter.GoalViewHolder>() {
 
-    inner class GoalViewHolder(private val binding: ItemGoalBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val starStates = BooleanArray(5)
+    inner class GoalViewHolder(val binding: ItemGoalBinding) : RecyclerView.ViewHolder(binding.root) {
+        val starStates = BooleanArray(5)
 
         fun bind(goal: String) {
             binding.tvGoal.text = goal

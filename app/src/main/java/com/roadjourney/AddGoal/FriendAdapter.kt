@@ -4,15 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.roadjourney.R
 import com.roadjourney.databinding.ItemAddFriendBinding
 
 class FriendAdapter(
     private var friendList: List<Friend>,
-    private val onFriendToggled: (Friend, Boolean) -> Unit // 친구 추가/삭제 이벤트 콜백
+    private val onFriendToggled: (Friend, Boolean) -> Unit
 ) : RecyclerView.Adapter<FriendAdapter.FriendViewHolder>() {
 
-    private val addedFriends = mutableSetOf<String>() // 선택된 친구 저장
+    private val addedFriends = mutableSetOf<String>()
 
     inner class FriendViewHolder(val binding: ItemAddFriendBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -26,21 +27,28 @@ class FriendAdapter(
         val friend = friendList[position]
 
         with(holder.binding) {
-            tvAddFriendName.text = friend.name
-            tvAddFriendId.text = friend.id
+            tvAddFriendName.text = friend.nickname
+            tvAddFriendId.text = friend.accountId
 
-            val isAdded = addedFriends.contains(friend.id)
+            Glide.with(ivAddFriendProfile.context)
+                .load(friend.profileImage)
+                .placeholder(R.drawable.img_friend_profile1)
+                .error(R.drawable.img_friend_profile1)
+                .circleCrop()
+                .into(ivAddFriendProfile)
+
+            val isAdded = addedFriends.contains(friend.accountId)
             updateButtonState(isAdded, tvAddFriendBtn)
 
             tvAddFriendBtn.setOnClickListener {
                 if (isAdded) {
-                    addedFriends.remove(friend.id)
+                    addedFriends.remove(friend.accountId)
                     updateButtonState(false, tvAddFriendBtn)
-                    onFriendToggled(friend, false) // 삭제 콜백 호출
+                    onFriendToggled(friend, false)
                 } else {
-                    addedFriends.add(friend.id)
+                    addedFriends.add(friend.accountId)
                     updateButtonState(true, tvAddFriendBtn)
-                    onFriendToggled(friend, true) // 추가 콜백 호출
+                    onFriendToggled(friend, true)
                 }
             }
         }
