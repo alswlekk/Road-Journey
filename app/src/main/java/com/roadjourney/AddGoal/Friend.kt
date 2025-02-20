@@ -8,4 +8,3 @@ data class Friend(
     val statusMessage: String?,
     val friendStatus: String
 )
-

@@ -10,7 +10,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import android.content.Context
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roadjourney.databinding.DialogGoalDetailBinding
 import kotlinx.coroutines.CoroutineScope
@@ -67,6 +66,8 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
             dialog.dismiss()
         }
 
+        dialog.show()
+
         val apiService = HomeApi.getInstance("http://52.78.84.107:8080", token)
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -81,12 +82,6 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
                                 val dateInfo = goal.dateInfo
                                 val subGoals = goal.subGoalList
 
-                                if (subGoals.isEmpty()) {
-                                    Toast.makeText(context, "서브 목표 없음", Toast.LENGTH_SHORT).show()
-                                } else {
-                                    Toast.makeText(context, "서브 목표 개수: ${subGoals.size}", Toast.LENGTH_SHORT).show()
-                                }
-
                                 dialogBinding.tvGoalDetailId.text = "Goal ${goal.goalId}"
                                 dialogBinding.tvGoalDetailTitle.text = goal.title
                                 dialogBinding.tvGoalDetailContent.text = goal.description
@@ -99,21 +94,14 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
                                 dialogBinding.rvGoalDetailGoal.layoutManager = LinearLayoutManager(context)
                                 val subGoalAdapter = GoalDetailAdapter(subGoals, goal.subGoalType)
                                 dialogBinding.rvGoalDetailGoal.adapter = subGoalAdapter
-
-                                dialog.show()
                             }
                         }
                     }
                 }
             } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "네트워크 오류: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
             }
         }
     }
-
-
 
     private fun setStarsVisibility(binding: DialogGoalDetailBinding, difficulty: Int) {
         binding.ivGoalDetailStar1.visibility = if (difficulty >= 1) View.VISIBLE else View.GONE

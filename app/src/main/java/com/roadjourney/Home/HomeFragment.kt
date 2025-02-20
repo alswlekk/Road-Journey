@@ -28,8 +28,6 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        homeAdapter = HomeAdapter(emptyList(), requireContext(), "")
-        binding.rvHome.adapter = homeAdapter
         binding.rvHome.layoutManager = LinearLayoutManager(requireContext())
 
         binding.rgHome.check(R.id.rb_repeated)
@@ -37,6 +35,8 @@ class HomeFragment : Fragment() {
         sharedViewModel.accessToken.observe(viewLifecycleOwner) { token ->
             sharedViewModel.userId.observe(viewLifecycleOwner) { userId ->
                 if (!token.isNullOrEmpty() && userId != -1) {
+                    homeAdapter = HomeAdapter(emptyList(), requireContext(), token)
+                    binding.rvHome.adapter = homeAdapter
                     fetchGoals("repeated", token, userId)
                 }
             }

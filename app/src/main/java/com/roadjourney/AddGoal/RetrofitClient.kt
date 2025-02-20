@@ -13,5 +13,14 @@ object RetrofitClient {
             .build()
             .create(FriendService::class.java)
     }
+
+    val goalService: AddGoalService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AddGoalService::class.java)
+    }
 }
+
 

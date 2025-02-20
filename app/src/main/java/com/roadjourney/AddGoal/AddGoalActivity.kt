@@ -66,6 +66,7 @@ class AddGoalActivity : AppCompatActivity() {
 
         binding.tvAddGoalBtn.setOnClickListener {
             if (binding.tvAddGoalBtn.isEnabled) {
+                submitGoal()
                 if (!isGoalShare){
                     showSaveDialog()
                 }else{
@@ -495,4 +496,100 @@ class AddGoalActivity : AppCompatActivity() {
         binding.rvAddGoalFriend.visibility = if (selectedFriends.isEmpty()) View.GONE else View.VISIBLE
     }
 
+    private fun submitGoal() {
+        val title = binding.etAddGoal.text.toString()
+        val difficulty = starStates.count { it }.toFloat()
+
+        val category = when (binding.tvAddGoalLong.text.toString()) {
+            "반복" -> "repeated"
+            "단기" -> "short-term"
+            "장기" -> "long-term"
+            else -> "repeated"
+        }
+
+        val description = binding.etAddGoalDetail.text.toString()
+        val sharedGoal = isGoalShare
+        val publicGoal = isGoalFriend
+
+        val sharedGoalType = if (sharedGoal) {
+            when (binding.tvAddGoalFriendType.text.toString()) {
+                "협동" -> "co-operative"
+                "경쟁" -> "competitive"
+                else -> null
+            }
+        } else {
+            null
+        }
+
+        val subGoalType = when {
+            binding.tvAddGoalNormal.background.constantState == resources.getDrawable(R.drawable.shape_fill_blue1_10).constantState -> "normal"
+            binding.tvAddGoalAddtional.background.constantState == resources.getDrawable(R.drawable.shape_fill_blue1_10).constantState -> "stepByStep"
+            binding.tvAddGoalCheck.background.constantState == resources.getDrawable(R.drawable.shape_fill_blue1_10).constantState -> "checkList"
+            else -> "normal"
+        }
+
+        val repeatedGoal = category == "repeated"
+
+        val dateInfo = if (repeatedGoal) {
+            DateInfo(
+                startAt = getCurrentDate(),
+                expireAt = getCurrentDate(),
+                repetitionPeriod = binding.tvAddGoalDay.text.toString().replace("일", "").toIntOrNull() ?: 0,
+                repetitionNumber = binding.tvAddGoalMany.text.toString().replace("회", "").toIntOrNull() ?: 0
+            )
+        } else {
+            DateInfo(
+                startAt = binding.tvAddGoalDay.text.toString().replace(".", "-"),
+                expireAt = binding.tvAddGoalMany.text.toString().replace(".", "-"),
+                repetitionPeriod = 0,
+                repetitionNumber = 0
+            )
+        }
+
+        val friendList = selectedFriends.map { FriendRequest(it.userId) }
+
+        val subGoalList = mutableListOf<SubGoal>()
+        for (i in 0 until binding.rvAddGoal.childCount) {
+            val viewHolder = binding.rvAddGoal.findViewHolderForAdapterPosition(i) as? GoalAdapter.GoalViewHolder
+            if (viewHolder != null) {
+                val subGoalDesc = viewHolder.binding.etGoalDetail.text.toString()
+                val subGoalDifficulty = viewHolder.starStates.count { it }.toFloat()
+                subGoalList.add(SubGoal(index = i, difficulty = subGoalDifficulty, description = subGoalDesc))
+            }
+        }
+
+        val goalRequest = GoalRequest(
+            title = title,
+            difficulty = difficulty,
+            category = category,
+            description = description,
+            sharedGoal = sharedGoal,
+            sharedGoalType = sharedGoalType,
+            publicGoal = publicGoal,
+            subGoalType = subGoalType,
+            dateInfo = dateInfo,
+            friendList = friendList,
+            subGoalList = subGoalList,
+            repeatedGoal = repeatedGoal
+        )
+
+        RetrofitClient.goalService.createGoal("Bearer $accessToken", goalRequest)
+            .enqueue(object : retrofit2.Callback<GoalResponse> {
+                override fun onResponse(call: Call<GoalResponse>, response: Response<GoalResponse>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            finish()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<GoalResponse>, t: Throwable) {
+                }
+            })
+    }
+
+    private fun getCurrentDate(): String {
+        val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+        return sdf.format(java.util.Date())
+    }
 }
