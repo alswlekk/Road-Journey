@@ -72,43 +72,42 @@ class LoginActivity : AppCompatActivity() {
             if (binding.etLoginId.text.toString().trim().isEmpty() || binding.etLoginPw.text.toString().trim().isEmpty()) {
                     binding.tvNoInputError.visibility = View.VISIBLE
                 binding.tvLoginError.visibility = View.INVISIBLE
-                    return@setOnClickListener
             } else {
                 binding.tvNoInputError.visibility = View.INVISIBLE
-            }
 
-            val id = binding.etLoginId.text.toString()
-            val pw = binding.etLoginPw.text.toString()
+                val id = binding.etLoginId.text.toString()
+                val pw = binding.etLoginPw.text.toString()
 
-            val service = RetrofitObject.retrofit.create(LoginService::class.java)
-            val call = service.postLoginData(LoginData(id, pw))
-            call.enqueue(object : Callback<LoginResponseData> {
-                override fun onResponse(
-                    call: Call<LoginResponseData>,
-                    response: Response<LoginResponseData>
-                ) {
-                    if (response.isSuccessful) {
-                        val tokenData = response.body()?.data
-                        if (tokenData != null) {
-                            SharedPreferencesHelper.saveTokenData(this@LoginActivity, tokenData)
+                val service = RetrofitObject.retrofit.create(LoginService::class.java)
+                val call = service.postLoginData(LoginData(id, pw))
+                call.enqueue(object : Callback<LoginResponseData> {
+                    override fun onResponse(
+                        call: Call<LoginResponseData>,
+                        response: Response<LoginResponseData>
+                    ) {
+                        if (response.isSuccessful) {
+                            val tokenData = response.body()?.data
+                            if (tokenData != null) {
+                                SharedPreferencesHelper.saveTokenData(this@LoginActivity, tokenData)
 
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
-                                putExtra("accessToken", tokenData.accessToken)
-                                putExtra("userId", tokenData.userId)
+                                val intent = Intent(this@LoginActivity, MainActivity::class.java).apply {
+                                    putExtra("accessToken", tokenData.accessToken)
+                                    putExtra("userId", tokenData.userId)
+                                }
+                                startActivity(intent)
+                                finish()
                             }
-                            startActivity(intent)
-                            finish()
+                        } else {
+                            binding.tvLoginError.visibility = View.VISIBLE
                         }
-                    } else {
+                    }
+
+                    override fun onFailure(call: Call<LoginResponseData>, t: Throwable) {
                         binding.tvLoginError.visibility = View.VISIBLE
                     }
-                }
 
-                override fun onFailure(call: Call<LoginResponseData>, t: Throwable) {
-                    binding.tvLoginError.visibility = View.VISIBLE
-                }
-
-            })
+                })
+            }
         }
     }
 }

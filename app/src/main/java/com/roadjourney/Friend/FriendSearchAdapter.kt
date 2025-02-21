@@ -1,17 +1,26 @@
 import android.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.gms.common.api.Response
 import com.roadjourney.AddGoal.Friend
+import com.roadjourney.Friend.SendRequestData
+import com.roadjourney.Friend.SendRequestResponse
 
 import com.roadjourney.R
+import com.roadjourney.Retrofit.RetrofitObject
+import com.roadjourney.Retrofit.Service.FriendManageService
 import com.roadjourney.databinding.DialogFriendSearchBinding
 import com.roadjourney.databinding.ItemFriendSearchBinding
+import retrofit2.Call
+import retrofit2.Callback
 
 class FriendSearchAdapter(
     private var friendList: List<Friend>,
+    private val token : String?
 ) : RecyclerView.Adapter<FriendSearchAdapter.FriendSearchViewHolder>() {
 
     inner class FriendSearchViewHolder(val binding: ItemFriendSearchBinding) :
@@ -29,6 +38,7 @@ class FriendSearchAdapter(
                 .into(binding.ivFriendRcProfile)
 
             binding.tvRcFriendBtn.setOnClickListener {
+                Log.d("FriendSearchAdapter", "token : $token")
                 val dialogBinding = DialogFriendSearchBinding.inflate(LayoutInflater.from(itemView.context))
                 dialogBinding.tvFriendPopupName.text = item.nickname
                 dialogBinding.tvFriendPopupId.text = item.accountId
@@ -55,6 +65,7 @@ class FriendSearchAdapter(
                 }
 
                 var isFriend = item.friendStatus
+                Log.d("FriendSearchAdapter", "isFriend : $isFriend")
                 if (isFriend.equals("IS_NOT_FRIEND")) {
                     dialogBinding.btnFriendRequest.visibility = View.VISIBLE
                     dialogBinding.tvFriendRequestWait.visibility = View.GONE
@@ -70,8 +81,28 @@ class FriendSearchAdapter(
                 }
 
                 dialogBinding.btnFriendRequest.setOnClickListener {
-                    dialogBinding.btnFriendRequest.visibility = View.GONE
-                    dialogBinding.tvFriendRequestWait.visibility = View.VISIBLE
+                    val authToken = "Bearer $token"
+                    val service = RetrofitObject.retrofit.create(FriendManageService::class.java)
+                    val call = service.postFriendRequest(authToken,SendRequestData(item.userId))
+                    call.enqueue(object : Callback<SendRequestResponse> {
+                        override fun onResponse(
+                            call: Call<SendRequestResponse>,
+                            response: retrofit2.Response<SendRequestResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                dialogBinding.btnFriendRequest.visibility = View.GONE
+                                dialogBinding.tvFriendRequestWait.visibility = View.VISIBLE
+                                Log.d("FriendSearchAdapter", "친구 요청 성공")
+                            } else {
+                                Log.d("FriendSearchAdapter", "친구 요청 실패 - 코드: ${response.code()}, 메시지: ${response.errorBody()?.string()}")
+                            }
+                        }
+
+                        override fun onFailure(call: Call<SendRequestResponse>, t: Throwable) {
+                            Log.d("FriendSearchAdapter", "친구 요청 실패<네트워크 오류>")
+                        }
+
+                    })
                 }
 
                 dialog.show()

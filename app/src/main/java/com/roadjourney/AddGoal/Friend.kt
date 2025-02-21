@@ -6,5 +6,5 @@ data class Friend(
     val nickname: String,
     val profileImage: String,
     val statusMessage: String?,
-    val friendStatus: String
+    var friendStatus: String
 )

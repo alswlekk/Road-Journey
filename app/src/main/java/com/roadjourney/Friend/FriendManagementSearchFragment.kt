@@ -33,7 +33,7 @@ class FriendManagementSearchFragment : Fragment() {
         Log.d("FriendManagementSearch", "sharedViewModel: $sharedViewModel")
         binding = FragmentFriendManagementSearchBinding.inflate(inflater, container, false)
         Log.d("FriendManagementSearch", "현재 저장된 토큰: ${sharedViewModel.accessToken.value}")
-        friendSearchAdapter = FriendSearchAdapter(emptyList())
+        friendSearchAdapter = FriendSearchAdapter(emptyList(), sharedViewModel.accessToken.value)
         binding.rvFriendSearchResult.adapter = friendSearchAdapter
         binding.rvFriendSearchResult.layoutManager = LinearLayoutManager(requireActivity())
         // LiveData를 감지해서 값이 설정될 때까지 기다리기
@@ -73,6 +73,7 @@ class FriendManagementSearchFragment : Fragment() {
                             } else {
                                 binding.tvFriendNoResult.visibility = View.GONE
                                 friendSearchAdapter.updateList(friends)
+
                             }
                         } else {
                             Log.e("FriendManagementSearch", "response is not successful")
