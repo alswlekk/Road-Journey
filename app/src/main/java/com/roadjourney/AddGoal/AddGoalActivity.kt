@@ -1,5 +1,6 @@
 package com.roadjourney.AddGoal
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -47,7 +48,9 @@ class AddGoalActivity : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
-        binding.ivAddGoalBack.setOnClickListener { finish() }
+        binding.ivAddGoalBack.setOnClickListener {
+            finish()
+        }
 
         val stars = listOf(
             binding.ivAddGoalStar1,
@@ -353,6 +356,9 @@ class AddGoalActivity : AppCompatActivity() {
 
         saveDialogBinding.tvSaveBtn.setOnClickListener {
             saveDialog.dismiss()
+            val intent = Intent()
+            intent.putExtra("goalCreated", true)
+            setResult(RESULT_OK, intent)
             finish()
         }
 
@@ -368,6 +374,9 @@ class AddGoalActivity : AppCompatActivity() {
 
         requestDialogBinding.tvRequestBtn.setOnClickListener {
             requestDialog.dismiss()
+            val intent = Intent()
+            intent.putExtra("goalCreated", true)
+            setResult(RESULT_OK, intent)
             finish()
         }
 
@@ -578,7 +587,6 @@ class AddGoalActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<GoalResponse>, response: Response<GoalResponse>) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            finish()
                         }
                     }
                 }

@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.roadjourney.R
+import com.roadjourney.SharedViewModel
 import com.roadjourney.databinding.FragmentCheckPwIdBinding
 
 class CheckPwIdFragment : Fragment() {
     lateinit var binding: FragmentCheckPwIdBinding
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +44,9 @@ class CheckPwIdFragment : Fragment() {
         }
         binding.etPwCheck.addTextChangedListener(textWatcher)
         binding.btnNextFilled.setOnClickListener {
+            val id = sharedViewModel.userId.value
+            val pw = binding.etPwCheck.text.toString()
+
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fcv_change_account, ChangeIdFragment())

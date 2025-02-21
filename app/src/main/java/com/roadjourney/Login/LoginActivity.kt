@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             if (binding.etLoginId.text.toString().trim().isEmpty() || binding.etLoginPw.text.toString().trim().isEmpty()) {
                     binding.tvNoInputError.visibility = View.VISIBLE
+                binding.tvLoginError.visibility = View.INVISIBLE
                     return@setOnClickListener
             } else {
                 binding.tvNoInputError.visibility = View.INVISIBLE

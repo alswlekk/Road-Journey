@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/iv_friend_rc_background"
-        android:layout_width="390dp"
+        android:layout_width="400dp"
         android:layout_height="150dp"
         android:background="@drawable/shape_friend_rc_background"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         android:id="@+id/iv_friend_rc_profile"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/img_friend_profile1"
         app:layout_constraintStart_toStartOf="parent"

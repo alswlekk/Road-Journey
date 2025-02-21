@@ -3,7 +3,9 @@ package com.roadjourney.MyPage
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import com.roadjourney.R
+import com.roadjourney.SharedViewModel
 import com.roadjourney.databinding.ActivityAccountManagementBinding
 
 class AccountManagementActivity : AppCompatActivity() {

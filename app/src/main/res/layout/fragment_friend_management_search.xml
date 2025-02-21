@@ -8,6 +8,7 @@
     tools:context=".Friend.FriendManagementActivity">
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_friend_no_result"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,11 +59,20 @@
         android:layout_marginTop="25dp"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/rv_friend_search_result"
-        app:layout_constraintTop_toTopOf="@id/iv_friend_line"
-        />
+        app:layout_constraintTop_toBottomOf="@id/iv_friend_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/rv_friend_search_result"
+            app:layout_constraintTop_toTopOf="@id/iv_friend_line"
+            />
+    </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

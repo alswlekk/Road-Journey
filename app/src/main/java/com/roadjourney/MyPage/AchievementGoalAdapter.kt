@@ -4,12 +4,11 @@ import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.roadjourney.R
 import com.roadjourney.databinding.DialogSuccessAchievementGoalBinding
 import com.roadjourney.databinding.ItemAchievementBinding
 
 class AchievementGoalAdapter(
-    private val achievements: List<AchievementData>
+    private var achievements: List<AchievementData>
 ) : RecyclerView.Adapter<AchievementGoalAdapter.AchievementViewHolder>() {
     inner class AchievementViewHolder(private val binding: ItemAchievementBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -49,5 +48,10 @@ class AchievementGoalAdapter(
 
     override fun onBindViewHolder(holder: AchievementViewHolder, position: Int) {
         holder.bind(achievements[position])
+    }
+
+    fun updateData(data: List<AchievementData>) {
+        achievements = data
+        notifyDataSetChanged()
     }
 }

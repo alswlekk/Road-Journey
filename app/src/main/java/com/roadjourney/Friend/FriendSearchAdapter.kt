@@ -3,7 +3,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.roadjourney.Friend.Friend
+import com.bumptech.glide.Glide
+import com.roadjourney.AddGoal.Friend
+
+import com.roadjourney.R
 import com.roadjourney.databinding.DialogFriendSearchBinding
 import com.roadjourney.databinding.ItemFriendSearchBinding
 
@@ -15,15 +18,33 @@ class FriendSearchAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Friend) {
             // Friend 객체를 UI에 바인딩
-            binding.tvRcFriendId.text = item.id
-            binding.tvRcFriendName.text = item.name
-            binding.ivFriendRcProfile.setImageResource(item.imageRes)
+            binding.tvRcFriendId.text = item.accountId
+            binding.tvRcFriendName.text = item.nickname
+
+            Glide.with(binding.ivFriendRcProfile.context)
+                .load(item.profileImage)
+                .placeholder(R.drawable.img_friend_profile1)
+                .error(R.drawable.img_friend_profile1)
+                .circleCrop()
+                .into(binding.ivFriendRcProfile)
 
             binding.tvRcFriendBtn.setOnClickListener {
                 val dialogBinding = DialogFriendSearchBinding.inflate(LayoutInflater.from(itemView.context))
-                dialogBinding.tvFriendPopupName.text = item.name
-                dialogBinding.tvFriendPopupId.text = item.id
-                dialogBinding.ivFriendPopupProfile.setImageResource(item.imageRes)
+                dialogBinding.tvFriendPopupName.text = item.nickname
+                dialogBinding.tvFriendPopupId.text = item.accountId
+
+                if (item.statusMessage.isNullOrEmpty() || item.statusMessage == "null") {
+                    dialogBinding.tvFriendPopupQuote.text = "상태 메시지가 없습니다."
+                } else {
+                    dialogBinding.tvFriendPopupQuote.text = item.statusMessage
+                }
+
+                Glide.with(dialogBinding.ivFriendPopupProfile.context)
+                    .load(item.profileImage)
+                    .placeholder(R.drawable.img_friend_popup_profile)
+                    .error(R.drawable.img_friend_popup_profile)
+                    .circleCrop()
+                    .into(dialogBinding.ivFriendPopupProfile)
 
                 val dialog = AlertDialog.Builder(itemView.context)
                     .setView(dialogBinding.root)
@@ -31,6 +52,21 @@ class FriendSearchAdapter(
 
                 dialogBinding.ivFriendPopupClose.setOnClickListener {
                     dialog.dismiss()
+                }
+
+                var isFriend = item.friendStatus
+                if (isFriend.equals("IS_NOT_FRIEND")) {
+                    dialogBinding.btnFriendRequest.visibility = View.VISIBLE
+                    dialogBinding.tvFriendRequestWait.visibility = View.GONE
+                    dialogBinding.tvFriendAlready.visibility = View.GONE
+                } else if (isFriend.equals("PENDING")) {
+                    dialogBinding.btnFriendRequest.visibility = View.GONE
+                    dialogBinding.tvFriendRequestWait.visibility = View.VISIBLE
+                    dialogBinding.tvFriendAlready.visibility = View.GONE
+                } else if (isFriend.equals("IS_FREIND")) {
+                    dialogBinding.btnFriendRequest.visibility = View.GONE
+                    dialogBinding.tvFriendRequestWait.visibility = View.GONE
+                    dialogBinding.tvFriendAlready.visibility = View.VISIBLE
                 }
 
                 dialogBinding.btnFriendRequest.setOnClickListener {

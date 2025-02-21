@@ -25,14 +25,16 @@
             android:name=".Friend.FriendManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Login.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".CreateAccount.CreateAccountActivity"
             android:exported="false" />

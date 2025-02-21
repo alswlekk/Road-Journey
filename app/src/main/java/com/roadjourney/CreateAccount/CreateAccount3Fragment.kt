@@ -31,7 +31,7 @@ class CreateAccount3Fragment : Fragment() {
     private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             selectedImageUri = it
-            binding.ivProfile.setImageURI(it) // 이미지 설정
+            binding.ivProfile.setImageURI(it)
         }
     }
 

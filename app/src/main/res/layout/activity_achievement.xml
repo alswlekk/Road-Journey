@@ -78,14 +78,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fcv_achievement"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_achievement_goal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="50dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@id/cl_choose_category" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

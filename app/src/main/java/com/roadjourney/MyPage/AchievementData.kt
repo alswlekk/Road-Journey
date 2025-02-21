@@ -4,4 +4,5 @@ data class AchievementData(
     val achievementTitle: String,
     val achievementMission: String,
     val achievementReward: String,
+    val category : String
 )
