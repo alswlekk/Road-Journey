@@ -11,13 +11,16 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.roadjourney.R
 import com.roadjourney.databinding.DialogGoalDetailBinding
+import com.roadjourney.databinding.DialogGoalFailBinding
+import com.roadjourney.databinding.DialogGoalSuccessBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeAdapter(private var items: List<GoalItem>, private val context: Context, private val token: String) :
+class HomeAdapter(private var items: List<GoalItem>, private val context: Context, private val token: String, private val homeFragment: HomeFragment ) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     inner class HomeViewHolder(val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -33,6 +36,13 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
             binding.ivHomeStar3.visibility = if (item.difficulty >= 3) View.VISIBLE else View.GONE
             binding.ivHomeStar4.visibility = if (item.difficulty >= 4) View.VISIBLE else View.GONE
             binding.ivHomeStar5.visibility = if (item.difficulty >= 5) View.VISIBLE else View.GONE
+
+            when (item.color) {
+                "white" -> binding.root.setBackgroundResource(R.drawable.home_item_background_white)
+                "blue" -> binding.root.setBackgroundResource(R.drawable.home_item_background_blue)
+                "red" -> binding.root.setBackgroundResource(R.drawable.home_item_background_red)
+                else -> binding.root.setBackgroundResource(R.drawable.home_item_background_blue)
+            }
 
             binding.root.setOnClickListener {
                 showGoalDetailDialog(context, item.goalId, token)
@@ -90,10 +100,63 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
                                 dialogBinding.pbGoalDetail.progress = goal.progress
 
                                 setStarsVisibility(dialogBinding, goal.difficulty)
-
+                                if(goal.subGoalType == "normal"){
+                                    dialogBinding.tvGoalDetailBtnSuccess.setBackgroundResource(R.drawable.shape_fill_activate_25)
+                                }
                                 dialogBinding.rvGoalDetailGoal.layoutManager = LinearLayoutManager(context)
-                                val subGoalAdapter = GoalDetailAdapter(subGoals, goal.subGoalType)
+                                val subGoalAdapter = GoalDetailAdapter(subGoals, goal.subGoalType, goalId, token)
                                 dialogBinding.rvGoalDetailGoal.adapter = subGoalAdapter
+
+                                dialogBinding.tvGoalDetailBtnFail.setOnClickListener {
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        try {
+                                            val response = apiService.failGoal(goal.goalId.toLong(), "Bearer $token")
+                                            withContext(Dispatchers.Main) {
+                                                if (response.isSuccessful) {
+                                                    val body = response.body()
+                                                    if (body != null && body.status == 200) {
+                                                        if (body.result != null) {
+                                                            dialog.dismiss()
+                                                            showGoalFailDialog(context, body.result.gold, body.result.growthPoint)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } catch (e: Exception) {
+                                        }
+                                    }
+                                }
+
+                                dialogBinding.tvGoalDetailBtnSuccess.setOnClickListener {
+                                    CoroutineScope(Dispatchers.IO).launch {
+                                        try {
+                                            val response = apiService.completeGoal(goal.goalId.toLong(), "Bearer $token")
+
+                                            withContext(Dispatchers.Main) {
+                                                if (response.isSuccessful) {
+                                                    val body = response.body()
+
+                                                    if (body != null && body.status == 200) {
+                                                        if (body.result != null) {
+                                                            dialog.dismiss()
+                                                            showGoalSuccessDialog(context, body.result.gold, body.result.growthPoint)
+                                                        }
+
+                                                        dialogBinding.tvGoalDetailBtnSuccess.isEnabled = false
+                                                        dialogBinding.tvGoalDetailBtnSuccess.setBackgroundResource(
+                                                            R.drawable.shape_fill_gray3_25)
+
+                                                        dialog.dismiss()
+                                                        homeFragment.fetchMainInfo(token, homeFragment.sharedViewModel.userId.value!!.toLong())
+                                                        homeFragment.fetchGoals("repeated", token, homeFragment.sharedViewModel.userId.value!!)
+                                                    }
+                                                }
+                                            }
+                                        } catch (e: Exception) {
+                                        }
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -102,6 +165,44 @@ class HomeAdapter(private var items: List<GoalItem>, private val context: Contex
             }
         }
     }
+
+    private fun showGoalFailDialog(context: Context, gold: Int, growthPoint: Int) {
+        val dialog = Dialog(context)
+        val dialogBinding = DialogGoalFailBinding.inflate(LayoutInflater.from(context))
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        dialogBinding.tvGoalCoin.text = "골드 $gold"
+        dialogBinding.tvGoalGrow.text = "캐릭터 성장도 $growthPoint"
+
+        dialogBinding.tvSaveBtn.setOnClickListener {
+            dialog.dismiss()
+            homeFragment.fetchMainInfo(token, homeFragment.sharedViewModel.userId.value!!.toLong())
+            homeFragment.fetchGoals("repeated", token, homeFragment.sharedViewModel.userId.value!!)
+        }
+
+        dialog.show()
+    }
+
+    private fun showGoalSuccessDialog(context: Context, gold: Int, growthPoint: Int) {
+        val dialog = Dialog(context)
+        val dialogBinding = DialogGoalSuccessBinding.inflate(LayoutInflater.from(context))
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        dialogBinding.tvGoalCoin.text = "골드 +$gold"
+        dialogBinding.tvGoalGrow.text = "캐릭터 성장도 +$growthPoint"
+
+        dialogBinding.tvSaveBtn.setOnClickListener {
+            dialog.dismiss()
+            homeFragment.fetchMainInfo(token, homeFragment.sharedViewModel.userId.value!!.toLong())
+            homeFragment.fetchGoals("repeated", token, homeFragment.sharedViewModel.userId.value!!)
+        }
+
+        dialog.show()
+    }
+
+
 
     private fun setStarsVisibility(binding: DialogGoalDetailBinding, difficulty: Int) {
         binding.ivGoalDetailStar1.visibility = if (difficulty >= 1) View.VISIBLE else View.GONE
