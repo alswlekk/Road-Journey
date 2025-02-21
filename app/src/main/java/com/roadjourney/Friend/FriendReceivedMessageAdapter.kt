@@ -67,9 +67,11 @@ class FriendReceivedMessageAdapter(
             }
 
             binding.tvRcVisit.setOnClickListener {
+                messages.removeAt(adapterPosition)
+                notifyDataSetChanged()
                 val intent = Intent(binding.root.context, FriendProfileActivity::class.java)
-                //val name = message.message.split("님이")[0]
-                //intent.putExtra("tvHomeName", name)
+                val name = message.message.split("님이")[0]
+                intent.putExtra("tvHomeName", name)
                 binding.root.context.startActivity(intent)
             }
         }

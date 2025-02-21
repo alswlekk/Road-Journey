@@ -19,6 +19,7 @@ class FriendProfileActivity : AppCompatActivity() {
 
         binding = ActivityFriendProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.tvHomeName.text = intent.getStringExtra("tvHomeName")
 
         binding.ivFriendProfileBack.setOnClickListener {
             finish()
